@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace Bank.Models
 {
+    /// <summary>
+    /// Консультант
+    /// </summary>
     public class Consultant //: IEmployee
     {
         //private readonly DataProvider _dataProvider = new DataProvider();

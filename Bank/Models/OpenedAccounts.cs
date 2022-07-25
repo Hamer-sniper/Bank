@@ -9,15 +9,20 @@ namespace Bank.Models
 {
     public class OpenedAccounts<P, A> //: IAccount
     {
+        #region Свойства
         public P Person { get; set; }
         public A Account { get; set; }
+        #endregion
 
+        #region Конструкторы
         private OpenedAccounts(P person, A account)
         {
             Person = person;
             Account = account;
         }
+        #endregion
 
+        #region Методы
         public void Close()
         {
             throw new NotImplementedException();
@@ -33,5 +38,6 @@ namespace Bank.Models
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }
