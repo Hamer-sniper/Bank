@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Persons>
+  <Person>
+    <id>156a52c5-216f-4367-9fa0-9acff6beb43f</id>
+    <surname>Федоров 1</surname>
+    <name>Федор 1</name>
+    <middleName>Федорович 1</middleName>
+    <telephoneNumber>89187665571</telephoneNumber>
+    <pasport>0708 100601</pasport>
+  </Person>
+  <Person>
+    <id>008483a9-645f-4389-9964-e79726567523</id>
+    <surname>Федоров 2</surname>
+    <name>Федор 2</name>
+    <middleName>Федорович 2</middleName>
+    <telephoneNumber>89187665572</telephoneNumber>
+    <pasport>0708 100602</pasport>
+  </Person>
+  <Person>
+    <id>2d33ec0d-924a-40a4-8427-76a09ce0ee1f</id>
+    <surname>Федоров 3</surname>
+    <name>Федор 3</name>
+    <middleName>Федорович 3</middleName>
+    <telephoneNumber>89187665573</telephoneNumber>
+    <pasport>0708 100603</pasport>
+  </Person>
+  <Person>
+    <id>0c49bbc1-470f-49fa-9036-3b03ae379921</id>
+    <surname>Федоров 4</surname>
+    <name>Федор 4</name>
+    <middleName>Федорович 4</middleName>
+    <telephoneNumber>89187665574</telephoneNumber>
+    <pasport>0708 100604</pasport>
+  </Person>
+  <Person>
+    <id>d01a841b-69cc-431b-af50-02880d80fb51</id>
+    <surname>Федоров 5</surname>
+    <name>Федор 5</name>
+    <middleName>Федорович 5</middleName>
+    <telephoneNumber>89187665575</telephoneNumber>
+    <pasport>0708 100605</pasport>
+  </Person>
+  <Person>
+    <id>97e0a5a4-38e9-496f-99a0-69b55a26ae5b</id>
+    <surname>Федоров 6</surname>
+    <name>Федор 6</name>
+    <middleName>Федорович 6</middleName>
+    <telephoneNumber>89187665576</telephoneNumber>
+    <pasport>0708 100606</pasport>
+  </Person>
+  <Person>
+    <id>09b7fbf2-f425-42b3-9680-76775e3f2e15</id>
+    <surname>Федоров 7</surname>
+    <name>Федор 7</name>
+    <middleName>Федорович 7</middleName>
+    <telephoneNumber>89187665577</telephoneNumber>
+    <pasport>0708 100607</pasport>
+  </Person>
+  <Person>
+    <id>69b29615-2e66-4b2b-9a32-4a4b44fc824b</id>
+    <surname>Федоров 8</surname>
+    <name>Федор 8</name>
+    <middleName>Федорович 8</middleName>
+    <telephoneNumber>89187665578</telephoneNumber>
+    <pasport>0708 100608</pasport>
+  </Person>
+  <Person>
+    <id>50d85ba3-7659-40c2-9550-9ea732f74038</id>
+    <surname>Федоров 9</surname>
+    <name>Федор 9</name>
+    <middleName>Федорович 9</middleName>
+    <telephoneNumber>89187665579</telephoneNumber>
+    <pasport>0708 100609</pasport>
+  </Person>
+</Persons>

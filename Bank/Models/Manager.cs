@@ -1,14 +1,11 @@
-﻿using WpfApp3.Data;
-using WpfApp3.Interfaces;
-using WpfApp3.Log;
-using System;
+﻿using System;
 using System.Windows.Media.Imaging;
 using System.Collections.Generic;
 
-namespace WpfApp3.Models
+namespace Bank.Models
 {
-    public class Manager : IEmployee
-    {
+    public class Manager //: IEmployee
+    {/*
         private readonly DataManager _dataManager = new DataManager();
         private readonly BitmapImage manag = new BitmapImage();
 
@@ -88,6 +85,6 @@ namespace WpfApp3.Models
                 break;
             }
             _dataManager.AddToXmlFromList(employees);
-        }
+        }*/
     }
 }

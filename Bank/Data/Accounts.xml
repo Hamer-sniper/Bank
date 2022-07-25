@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Accounts>
+  <Account>
+    <id>807f1430-9052-4703-9a5b-bd6f7705656e</id>
+    <currency>Рубль</currency>
+    <number>0505 1589 1789 1041</number>
+  </Account>
+  <Account>
+    <id>cac5dad4-bc49-4666-b013-d28d24d717ff</id>
+    <currency>Рубль</currency>
+    <number>0505 1589 1789 1042</number>
+  </Account>
+  <Account>
+    <id>de28e843-9440-43a9-b7d3-766ffcf8e1e1</id>
+    <currency>Рубль</currency>
+    <number>0505 1589 1789 1043</number>
+  </Account>
+  <Account>
+    <id>4119b350-9b27-47a7-92f0-5f9b7f2a3390</id>
+    <currency>Рубль</currency>
+    <number>0505 1589 1789 1044</number>
+  </Account>
+  <Account>
+    <id>21ff56d5-688e-4ef1-9de1-a20107883429</id>
+    <currency>Рубль</currency>
+    <number>0505 1589 1789 1045</number>
+  </Account>
+  <Account>
+    <id>6ce87a40-9c68-4206-a67d-a0967c558831</id>
+    <currency>Рубль</currency>
+    <number>0505 1589 1789 1046</number>
+  </Account>
+  <Account>
+    <id>4d7841d8-9905-4f73-a6fd-71bbb861260f</id>
+    <currency>Рубль</currency>
+    <number>0505 1589 1789 1047</number>
+  </Account>
+  <Account>
+    <id>2f2d5626-b1e3-46d4-8d8a-40fd82573a3f</id>
+    <currency>Рубль</currency>
+    <number>0505 1589 1789 1048</number>
+  </Account>
+  <Account>
+    <id>80aaa192-2452-416c-bf37-6553bc0f5b01</id>
+    <currency>Рубль</currency>
+    <number>0505 1589 1789 1049</number>
+  </Account>
+</Accounts>

@@ -8,7 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Data\Databook.xml">
+    <None Remove="EmployeeIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="EmployeeIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Data\Accounts.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Clients.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Pictures\EmployeeIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
