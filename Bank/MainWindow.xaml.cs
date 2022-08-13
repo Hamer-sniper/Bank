@@ -85,17 +85,17 @@ namespace Bank
            
 
             // Не сохранять запись без введеного номера телефона.
-            if (string.IsNullOrWhiteSpace(TelephoneNumber.Text))
-            {
-                AddButton.IsEnabled = false;
-                UpdateButton.IsEnabled = false;
-                DeleteButton.IsEnabled = false;
-            }
-            if (!string.IsNullOrWhiteSpace(TelephoneNumber.Text) && ClientsList.SelectedItem != null)
-            {
-                UpdateButton.IsEnabled = true;                
+            //if (string.IsNullOrWhiteSpace(TelephoneNumber.Text))
+            //{
+            //    AddButton.IsEnabled = false;
+            //    UpdateButton.IsEnabled = false;
+            //    DeleteButton.IsEnabled = false;
+            //}
+            //if (!string.IsNullOrWhiteSpace(TelephoneNumber.Text) && ClientsList.SelectedItem != null)
+            //{
+            //    UpdateButton.IsEnabled = true;                
                 
-            }
+            //}
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)

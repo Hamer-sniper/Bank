@@ -4,9 +4,9 @@ using Bank.Interfaces;
 namespace Bank.Models
 {
     /// <summary>
-    /// Клиент
+    /// Клиент (Физическое лицо)
     /// </summary>
-    public class Client : Person, IPerson
+    public class Client : Physical
     {
         #region Конструкторы
         /// <summary>

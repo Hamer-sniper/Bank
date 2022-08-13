@@ -4,38 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bank.Models
+namespace Bank.Interfaces
 {
     /// <summary>
-    /// Персона
+    /// Интерфейс персоны
     /// </summary>
-    public abstract class Person
+    public interface IPhysical
     {
-        #region Свойства
-        /// <summary>
+         /// <summary>
         /// Id
         /// </summary>
-        public string Id { get; set; } = string.Empty;
+        public string Id { get; set; }
         /// <summary>
         /// Фамилия
         /// </summary>
-        public string Surname { get; set; } = string.Empty;
+        public string Surname { get; set; }
         /// <summary>
         /// Имя
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
         /// <summary>
         /// Отчество
         /// </summary>
-        public string MiddleName { get; set; } = string.Empty;
+        public string MiddleName { get; set; }
         /// <summary>
         /// Телефон
         /// </summary>
-        public string TelephoneNumber { get; set; } = string.Empty;
+        public string TelephoneNumber { get; set; }
         /// <summary>
         /// Паспорт
         /// </summary>
-        public string Pasport { get; set; } = string.Empty;
-        #endregion
+        public string Pasport { get; set; }
     }
 }

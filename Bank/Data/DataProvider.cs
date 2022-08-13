@@ -10,6 +10,7 @@ namespace Bank.Data
     public class DataProvider
     {
         private readonly static string _clientsFilePath = Environment.CurrentDirectory + @"\Data\Clients.xml";
+        private readonly static string _companiesFilePath = Environment.CurrentDirectory + @"\Data\Companies.xml";
         private readonly static string _accountsFilePath = Environment.CurrentDirectory + @"\Data\Accounts.xml";
         private readonly static string _openedAccountsFilePath = Environment.CurrentDirectory + @"\Data\OpenedAccounts.xml";
 
@@ -87,7 +88,7 @@ namespace Bank.Data
         }
         #endregion
 
-        #region Персоны
+        #region Физические
         /// <summary>
         /// Автосоздание данных
         /// </summary>
@@ -113,7 +114,7 @@ namespace Bank.Data
 
             foreach (var client in clientsList)
             {
-                XElement person = new XElement("Person");
+                XElement physical = new XElement("Physical");
                 XElement id = new XElement("id", client.Id);
                 XElement surname = new XElement("surname", client.Surname);
                 XElement name = new XElement("name", client.Name);
@@ -121,8 +122,8 @@ namespace Bank.Data
                 XElement telephoneNumber = new XElement("telephoneNumber", client.TelephoneNumber);
                 XElement pasport = new XElement("pasport", client.Pasport);
 
-                person.Add(id, surname, name, middleName, telephoneNumber, pasport);
-                persons.Add(person);
+                physical.Add(id, surname, name, middleName, telephoneNumber, pasport);
+                persons.Add(physical);
             }
             persons.Save(_clientsFilePath);
         }
@@ -163,6 +164,89 @@ namespace Bank.Data
                 }
             }
             return clients;
+        }
+        #endregion
+
+        #region Юридические
+        /// <summary>
+        /// Автосоздание данных
+        /// </summary>
+        private void AutoCreationLegal()
+        {
+            var companies = new List<Company>();
+
+            for (int i = 1; i < 10; i++)
+            {
+                var company = new Company($"Федоров {i}", $"Федор {i}", $"Федорович {i}", $"8918766557{i}", $"0708 10060{i}", $"1-02-66-05-60662-0", $"ИП");
+                companies.Add(company);
+            }
+            WriteToXmlLegal(companies);
+        }
+
+        /// <summary>
+        /// Запись в xml
+        /// </summary>
+        /// <param name="companiesList">Компании</param>
+        public void WriteToXmlLegal(List<Company> companiesList)
+        {
+            XElement companies = new XElement("Companies");
+
+            foreach (var company in companiesList)
+            {
+                XElement Legal = new XElement("Legal");
+                XElement id = new XElement("id", company.Id);
+                XElement surname = new XElement("surname", company.Surname);
+                XElement name = new XElement("name", company.Name);
+                XElement middleName = new XElement("middleName", company.MiddleName);
+                XElement telephoneNumber = new XElement("telephoneNumber", company.TelephoneNumber);
+                XElement pasport = new XElement("pasport", company.Pasport);
+                XElement ogrn = new XElement("ogrn", company.OGRN);
+                XElement type = new XElement("type", company.Type);
+
+                Legal.Add(id, surname, name, middleName, telephoneNumber, pasport, ogrn, type);
+                companies.Add(Legal);
+            }
+            companies.Save(_companiesFilePath);
+        }
+
+        /// <summary>
+        /// Чтение из xml
+        /// </summary>        
+        /// <returns>clients</returns>
+        public List<Company> ReadFromXmlLegal()
+        {
+            if (!File.Exists(_companiesFilePath)) AutoCreation();
+
+            var companies = new List<Company>();
+            string xid = "", xsurname = "", xname = "", xmiddleName = "", xtelephoneNumber = "", xpasport = "", xogrn = "", xtype = "";
+
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(_companiesFilePath);
+
+            // получим корневой элемент
+            XmlElement? xRoot = xDoc.DocumentElement;
+            if (xRoot != null)
+            {
+                // обход всех узлов в корневом элементе
+                foreach (XmlElement xnode in xRoot)
+                {
+                    // обходим все дочерние узлы элемента
+                    foreach (XmlNode childnode in xnode.ChildNodes)
+                    {
+                        if (childnode.Name == "id") xid = childnode.InnerText;
+                        if (childnode.Name == "surname") xsurname = childnode.InnerText;
+                        if (childnode.Name == "name") xname = childnode.InnerText;
+                        if (childnode.Name == "middleName") xmiddleName = childnode.InnerText;
+                        if (childnode.Name == "telephoneNumber") xtelephoneNumber = childnode.InnerText;
+                        if (childnode.Name == "pasport") xpasport = childnode.InnerText;
+                        if (childnode.Name == "ogrn") xogrn = childnode.InnerText;
+                        if (childnode.Name == "type") xtype = childnode.InnerText;
+                    }
+                    var company = new Company(xid, xsurname, xname, xmiddleName, xtelephoneNumber, xpasport, xogrn, xtype);
+                    companies.Add(company);
+                }
+            }
+            return companies;
         }
         #endregion
 
