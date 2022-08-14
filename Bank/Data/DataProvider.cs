@@ -177,7 +177,7 @@ namespace Bank.Data
 
             for (int i = 1; i < 10; i++)
             {
-                var company = new Company($"Федоров {i}", $"Федор {i}", $"Федорович {i}", $"8918766557{i}", $"0708 10060{i}", $"1-02-66-05-60662-0", $"ИП");
+                var company = new Company($"Федоров {i}", $"Федор {i}", $"Федорович {i}", $"8918766557{i}", $"0708 10060{i}", $"1-02-66-05-60662-{i}", $"ИП");
                 companies.Add(company);
             }
             WriteToXmlLegal(companies);
@@ -212,10 +212,10 @@ namespace Bank.Data
         /// <summary>
         /// Чтение из xml
         /// </summary>        
-        /// <returns>clients</returns>
+        /// <returns>companies</returns>
         public List<Company> ReadFromXmlLegal()
         {
-            if (!File.Exists(_companiesFilePath)) AutoCreation();
+            if (!File.Exists(_companiesFilePath)) AutoCreationLegal();
 
             var companies = new List<Company>();
             string xid = "", xsurname = "", xname = "", xmiddleName = "", xtelephoneNumber = "", xpasport = "", xogrn = "", xtype = "";
@@ -256,32 +256,35 @@ namespace Bank.Data
         /// </summary>
         private void AutoCreationOpenedAccounts()
         {
-            //var clients = new List<Client>();
+            var openedAccounts = new List<OpenedAccounts>();
 
-            //for (int i = 1; i < 10; i++)
-            //{
-            //    var client = new Client($"Федоров {i}", $"Федор {i}", $"Федорович {i}", $"8918766557{i}", $"0708 10060{i}");
-            //    clients.Add(client);
-            //}
-            //WriteToXml(clients);
+            for (int i = 1; i < 10; i++)
+            {
+                var openedAccount = new OpenedAccounts(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), $"{i}00000");
+                openedAccounts.Add(openedAccount);
+            }
+            WriteToXmlOpenedAccounts(openedAccounts);
         }
 
         /// <summary>
         /// Запись в xml (Открытые счета)
         /// </summary>
-        /// <param name="clientsList">Клиенты</param>
-        public void WriteToXmlOpenedAccounts(List<Client> clientsList)
+        /// <param name="openedAccountsList">Открытые счета</param>
+        public void WriteToXmlOpenedAccounts(List<OpenedAccounts> openedAccountsList)
         {
             XElement openedAccounts = new XElement("OpenedAccounts");
 
-            foreach (var client in clientsList)
+            foreach (var openedAccount in openedAccountsList)
             {
-                XElement openedAccount = new XElement("OpenedAccount");
-                XElement idPerson = new XElement("idPerson", client.Id);
-                XElement idAccount = new XElement("idAccount", client.Surname);
-
-                openedAccount.Add(idPerson, idAccount);
-                openedAccounts.Add(openedAccount);
+                XElement openedxAccount = new XElement("OpenedAccount");
+                XElement openedAccountID = new XElement("openedAccountID", openedAccount.OpenedAccountID);
+                XElement accountID = new XElement("accountID", openedAccount.AccountID);
+                XElement counterpartyID = new XElement("counterpartyID", openedAccount.CounterpartyID);
+                XElement changingDate = new XElement("changingDate", openedAccount.ChangingDate);
+                XElement sum = new XElement("sum", openedAccount.Sum);
+                
+                openedxAccount.Add(openedAccountID, accountID, counterpartyID, changingDate, sum);
+                openedAccounts.Add(openedxAccount);
             }
             openedAccounts.Save(_openedAccountsFilePath);
         }
@@ -290,38 +293,37 @@ namespace Bank.Data
         /// Чтение из xml (Открытые счета)
         /// </summary>        
         /// <returns>clients</returns>
-        public List<Client> ReadFromXmlOpenedAccounts()
+        public List<OpenedAccounts> ReadFromXmlOpenedAccounts()
         {
-            //if (!File.Exists(_clientsFilePath)) AutoCreation();
+            if (!File.Exists(_openedAccountsFilePath)) AutoCreationOpenedAccounts();
 
-            var clients = new List<Client>();
-            //string xid = "", xsurname = "", xname = "", xmiddleName = "", xtelephoneNumber = "", xpasport = "";
+            var openedAccounts = new List<OpenedAccounts>();
+            string xopenedAccountID = "", xaccountID = "", xcounterpartyID = "", xchangingDate = "", xsum = "";
 
-            //XmlDocument xDoc = new XmlDocument();
-            //xDoc.Load(_clientsFilePath);
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(_clientsFilePath);
 
-            //// получим корневой элемент
-            //XmlElement? xRoot = xDoc.DocumentElement;
-            //if (xRoot != null)
-            //{
-            //    // обход всех узлов в корневом элементе
-            //    foreach (XmlElement xnode in xRoot)
-            //    {
-            //        // обходим все дочерние узлы элемента
-            //        foreach (XmlNode childnode in xnode.ChildNodes)
-            //        {
-            //            if (childnode.Name == "id") xid = childnode.InnerText;
-            //            if (childnode.Name == "surname") xsurname = childnode.InnerText;
-            //            if (childnode.Name == "name") xname = childnode.InnerText;
-            //            if (childnode.Name == "middleName") xmiddleName = childnode.InnerText;
-            //            if (childnode.Name == "telephoneNumber") xtelephoneNumber = childnode.InnerText;
-            //            if (childnode.Name == "pasport") xpasport = childnode.InnerText;
-            //        }
-            //        var client = new Client(xid, xsurname, xname, xmiddleName, xtelephoneNumber, xpasport);
-            //        clients.Add(client);
-            //    }
-            //}
-            return clients;
+            // получим корневой элемент
+            XmlElement? xRoot = xDoc.DocumentElement;
+            if (xRoot != null)
+            {
+                // обход всех узлов в корневом элементе
+                foreach (XmlElement xnode in xRoot)
+                {
+                    // обходим все дочерние узлы элемента
+                    foreach (XmlNode childnode in xnode.ChildNodes)
+                    {
+                        if (childnode.Name == "openedAccountID") xopenedAccountID = childnode.InnerText;
+                        if (childnode.Name == "accountID") xaccountID = childnode.InnerText;
+                        if (childnode.Name == "counterpartyID") xcounterpartyID = childnode.InnerText;
+                        if (childnode.Name == "changingDate") xchangingDate = childnode.InnerText;
+                        if (childnode.Name == "sum") xsum = childnode.InnerText;
+                    }
+                    var openedAccount = new OpenedAccounts(xopenedAccountID, xaccountID, xcounterpartyID, xchangingDate, xsum);
+                    openedAccounts.Add(openedAccount);
+                }
+            }
+            return openedAccounts;
         }
         #endregion
 

@@ -26,28 +26,6 @@ namespace Bank.Models
 
         #region Конструкторы
         /// <summary>
-        /// Конструктор без параметров
-        /// </summary>
-        public Account()
-        {
-            this.Id = Guid.NewGuid().ToString();
-            this.Currency = "Рубль";
-            this.Number = "0505 1589 1789 1045";
-        }
-
-        /// <summary>
-        /// Конструктор с автоподстановкой id
-        /// </summary>
-        /// <param name="currency">Фамилия</param>
-        /// <param name="number">Имя</param>
-        public Account(string currency, string number)
-        {
-            this.Id = Guid.NewGuid().ToString();
-            this.Currency = currency;
-            this.Number = number;
-        }
-
-        /// <summary>
         /// Конструктор со всеми полями
         /// </summary>
         /// <param name="id">id</param>
@@ -59,6 +37,20 @@ namespace Bank.Models
             this.Currency = currency;
             this.Number = number;
         }
+
+        /// <summary>
+        /// Конструктор с автоподстановкой id
+        /// </summary>
+        /// <param name="currency">Фамилия</param>
+        /// <param name="number">Имя</param>
+        public Account(string currency, string number) : 
+            this(Guid.NewGuid().ToString(), currency, number) { }
+
+        /// <summary>
+        /// Конструктор без параметров
+        /// </summary>
+        public Account() :
+            this("Рубль", "0505 1589 1789 1045") { }
         #endregion
     }
 }
