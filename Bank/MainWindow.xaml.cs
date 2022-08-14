@@ -22,7 +22,9 @@ namespace Bank
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            _dataProvider.ReadFromXmLAccounts();
             _dataProvider.ReadFromXmlOpenedAccounts();
+
             //EmployeeSelection.Items.Add("Консультант");
             //EmployeeSelection.Items.Add("Менеджер");
             //EmployeeSelection.SelectedIndex = 0;

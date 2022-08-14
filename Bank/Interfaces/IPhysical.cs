@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Bank.Interfaces
+﻿namespace Bank.Interfaces
 {
     /// <summary>
     /// Интерфейс персоны
     /// </summary>
-    public interface IPhysical
+    public interface IPhysical : ICounterparty
     {
-         /// <summary>
-        /// Id
-        /// </summary>
-        public string Id { get; set; }
         /// <summary>
         /// Фамилия
         /// </summary>

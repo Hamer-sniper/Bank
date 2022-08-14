@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Bank.Interfaces
+﻿namespace Bank.Interfaces
 {
     /// <summary>
     /// Интефейс субъекта (Физическое/Юридическое лицо)

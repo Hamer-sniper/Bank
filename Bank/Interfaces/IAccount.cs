@@ -1,26 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Bank.Interfaces
+﻿namespace Bank.Interfaces
 {
-    /// <summary>
-    /// Интефейс счета
-    /// </summary>
     public interface IAccount
     {
         /// <summary>
-        /// Открыть счет
+        /// Id
         /// </summary>
-        public void Open();
+        public string Id { get; set; }
 
         /// <summary>
-        /// Закрыть счет
+        /// Валюта
         /// </summary>
-        public void Close();
+        public string Currency { get; set; }
 
         /// <summary>
-        /// Перевод с одного счета на другой
+        /// Номер счета
         /// </summary>
-        public void Transact();
+        public string Number { get; set; }
+
+        /// <summary>
+        /// Сумма
+        /// </summary>
+        public string Sum { get; set; }
     }
 }

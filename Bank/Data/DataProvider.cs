@@ -25,7 +25,7 @@ namespace Bank.Data
 
             for (int i = 1; i < 10; i++)
             {
-                var account = new Account("Рубль", $"0505 1589 1789 104{i}");
+                var account = new Account("Рубль", $"0505 1589 1789 104{i}", $"{i}00000");
                 accounts.Add(account);
             }
             WriteToXmlAccounts(accounts);
@@ -45,8 +45,9 @@ namespace Bank.Data
                 XElement id = new XElement("id", account.Id);
                 XElement currency = new XElement("currency", account.Currency);
                 XElement number = new XElement("number", account.Number);
+                XElement sum = new XElement("sum", account.Sum);
 
-                ak.Add(id, currency, number);
+                ak.Add(id, currency, number, sum);
                 accounts.Add(ak);
             }
             accounts.Save(_accountsFilePath);
@@ -56,12 +57,12 @@ namespace Bank.Data
         /// Чтение из xml (Счета)
         /// </summary>        
         /// <returns>accounts</returns>
-        public List<Account> ReadFromXmAaccounts()
+        public List<Account> ReadFromXmLAccounts()
         {
             if (!File.Exists(_accountsFilePath)) AutoCreationAccounts();
 
             var accounts = new List<Account>();
-            string xid = "", xcurrency = "", xnumber = "";
+            string xid = "", xcurrency = "", xnumber = "", xsum = "";
 
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(_accountsFilePath);
@@ -79,8 +80,9 @@ namespace Bank.Data
                         if (childnode.Name == "id") xid = childnode.InnerText;
                         if (childnode.Name == "currency") xcurrency = childnode.InnerText;
                         if (childnode.Name == "number") xnumber = childnode.InnerText;
+                        if (childnode.Name == "sum") xsum = childnode.InnerText;
                     }
-                    var account = new Account(xid, xcurrency, xnumber);
+                    var account = new Account(xid, xcurrency, xnumber, xsum);
                     accounts.Add(account);
                 }
             }
@@ -260,7 +262,7 @@ namespace Bank.Data
 
             for (int i = 1; i < 10; i++)
             {
-                var openedAccount = new OpenedAccounts(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), $"{i}00000");
+                var openedAccount = new OpenedAccounts(Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
                 openedAccounts.Add(openedAccount);
             }
             WriteToXmlOpenedAccounts(openedAccounts);
@@ -281,9 +283,8 @@ namespace Bank.Data
                 XElement accountID = new XElement("accountID", openedAccount.AccountID);
                 XElement counterpartyID = new XElement("counterpartyID", openedAccount.CounterpartyID);
                 XElement changingDate = new XElement("changingDate", openedAccount.ChangingDate);
-                XElement sum = new XElement("sum", openedAccount.Sum);
                 
-                openedxAccount.Add(openedAccountID, accountID, counterpartyID, changingDate, sum);
+                openedxAccount.Add(openedAccountID, accountID, counterpartyID, changingDate);
                 openedAccounts.Add(openedxAccount);
             }
             openedAccounts.Save(_openedAccountsFilePath);
@@ -317,9 +318,8 @@ namespace Bank.Data
                         if (childnode.Name == "accountID") xaccountID = childnode.InnerText;
                         if (childnode.Name == "counterpartyID") xcounterpartyID = childnode.InnerText;
                         if (childnode.Name == "changingDate") xchangingDate = childnode.InnerText;
-                        if (childnode.Name == "sum") xsum = childnode.InnerText;
                     }
-                    var openedAccount = new OpenedAccounts(xopenedAccountID, xaccountID, xcounterpartyID, xchangingDate, xsum);
+                    var openedAccount = new OpenedAccounts(xopenedAccountID, xaccountID, xcounterpartyID, xchangingDate);
                     openedAccounts.Add(openedAccount);
                 }
             }

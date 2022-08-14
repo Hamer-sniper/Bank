@@ -1,66 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OpenedAccounts>
   <OpenedAccount>
-    <openedAccountID>69ce5483-9a0a-4278-8bc5-a6f85cbcd7b2</openedAccountID>
-    <accountID>938c30c0-576b-443f-8112-53b617723c62</accountID>
-    <counterpartyID>a1747b72-12ec-4e56-837a-bb790cdce2d0</counterpartyID>
-    <changingDate>14.08.2022 15:05:03</changingDate>
-    <sum>100000</sum>
+    <openedAccountID>a6628514-719f-4257-b0f8-5f8201d60114</openedAccountID>
+    <accountID>10486ced-bc1e-4df7-9ea6-e463bf4d844e</accountID>
+    <counterpartyID>61d40ed1-d821-4684-8633-7e71850bfd04</counterpartyID>
+    <changingDate>14.08.2022 16:43:40</changingDate>
   </OpenedAccount>
   <OpenedAccount>
-    <openedAccountID>2fe7a0e3-dfd6-44b7-8afa-e689be039042</openedAccountID>
-    <accountID>08d93196-270a-4568-aa04-14eefc628571</accountID>
-    <counterpartyID>a22dc2e6-d811-44c7-aeca-8e785988d484</counterpartyID>
-    <changingDate>14.08.2022 15:05:03</changingDate>
-    <sum>200000</sum>
+    <openedAccountID>b6822e9d-2ecf-48fa-a950-711be32364f2</openedAccountID>
+    <accountID>7a146005-af31-4f60-b20b-f17ac86bdcee</accountID>
+    <counterpartyID>194b4407-bc4b-475c-82cf-5f32061ea395</counterpartyID>
+    <changingDate>14.08.2022 16:43:40</changingDate>
   </OpenedAccount>
   <OpenedAccount>
-    <openedAccountID>07ed6182-7d8a-4dff-867e-1e38f4f69a00</openedAccountID>
-    <accountID>a38adf9e-acda-4753-9b21-55d0b70302dc</accountID>
-    <counterpartyID>037f8148-9893-4570-b47d-f8d620116204</counterpartyID>
-    <changingDate>14.08.2022 15:05:03</changingDate>
-    <sum>300000</sum>
+    <openedAccountID>22998199-937f-492f-9f3d-df2a18f01768</openedAccountID>
+    <accountID>a9f5db89-6c0e-4910-8a78-112a0709481a</accountID>
+    <counterpartyID>59a64ecf-3bed-44d4-9199-da109c5895e1</counterpartyID>
+    <changingDate>14.08.2022 16:43:40</changingDate>
   </OpenedAccount>
   <OpenedAccount>
-    <openedAccountID>c7e0266d-5a25-41a9-9470-5f048182e473</openedAccountID>
-    <accountID>b233081e-881e-470b-be68-53b986c5746c</accountID>
-    <counterpartyID>efe63232-2afc-4890-bfb2-36598b9fb41f</counterpartyID>
-    <changingDate>14.08.2022 15:05:03</changingDate>
-    <sum>400000</sum>
+    <openedAccountID>84a58f35-b8bb-4491-bb0a-404bed263eed</openedAccountID>
+    <accountID>93f0c135-6d0b-4b45-b7bb-19ed5ccc161e</accountID>
+    <counterpartyID>84a16ae7-b587-46ad-b612-e320085d7dfd</counterpartyID>
+    <changingDate>14.08.2022 16:43:40</changingDate>
   </OpenedAccount>
   <OpenedAccount>
-    <openedAccountID>5ac00a5f-5877-40fd-8d12-3325d4e5f6bf</openedAccountID>
-    <accountID>766bed14-de4a-4659-8371-d43d369a5f6c</accountID>
-    <counterpartyID>c2fa7dee-74a7-473d-9f59-c19c41f2bc3b</counterpartyID>
-    <changingDate>14.08.2022 15:05:03</changingDate>
-    <sum>500000</sum>
+    <openedAccountID>e48ebc03-992b-4659-a3e3-5cefd76fdcfa</openedAccountID>
+    <accountID>2200630f-04e9-40fc-a1ec-b4fa6a1fcd44</accountID>
+    <counterpartyID>dc9d201a-cbe0-4db5-9959-62001f976f3f</counterpartyID>
+    <changingDate>14.08.2022 16:43:40</changingDate>
   </OpenedAccount>
   <OpenedAccount>
-    <openedAccountID>7b1e326c-a8cc-4ade-9712-f9a0894faa6c</openedAccountID>
-    <accountID>69e620e2-4eb8-4e9e-a256-464ea57f4e7b</accountID>
-    <counterpartyID>9f4da232-8130-44cd-ba77-43722adfc978</counterpartyID>
-    <changingDate>14.08.2022 15:05:03</changingDate>
-    <sum>600000</sum>
+    <openedAccountID>734ec4c3-7542-4d3b-8540-9af7d8d31140</openedAccountID>
+    <accountID>6ecc2a4e-1af1-4a23-b183-3e75a375dc6c</accountID>
+    <counterpartyID>cc52b3f1-cecd-41d1-afd2-0c2c88fbbf6d</counterpartyID>
+    <changingDate>14.08.2022 16:43:40</changingDate>
   </OpenedAccount>
   <OpenedAccount>
-    <openedAccountID>8c5f2f50-90da-4608-b4d3-2261c31f08e2</openedAccountID>
-    <accountID>1cc06bad-1430-4771-b5cf-e26ad127db67</accountID>
-    <counterpartyID>9681db2d-e832-4314-a040-a36c6d63fd96</counterpartyID>
-    <changingDate>14.08.2022 15:05:03</changingDate>
-    <sum>700000</sum>
+    <openedAccountID>3b2d00cc-71b5-4cb8-8465-d11bbc5ce88f</openedAccountID>
+    <accountID>7d94d937-0d9b-49c3-9eaa-f4221928a4b7</accountID>
+    <counterpartyID>811ee15a-4314-432a-9808-204317eed340</counterpartyID>
+    <changingDate>14.08.2022 16:43:40</changingDate>
   </OpenedAccount>
   <OpenedAccount>
-    <openedAccountID>8ca54801-7875-4325-bdfe-9369980540cb</openedAccountID>
-    <accountID>a806cb96-309b-41f8-9360-c1886486d25b</accountID>
-    <counterpartyID>480ecbdf-3dec-40ec-936e-126582c30ac2</counterpartyID>
-    <changingDate>14.08.2022 15:05:03</changingDate>
-    <sum>800000</sum>
+    <openedAccountID>03b41387-162a-43ff-80a3-d3706abd55c1</openedAccountID>
+    <accountID>ad093c66-c38c-4fc6-a72d-d4f8f5e9d536</accountID>
+    <counterpartyID>62bc5021-80cb-4b68-87af-95e84adec3d8</counterpartyID>
+    <changingDate>14.08.2022 16:43:40</changingDate>
   </OpenedAccount>
   <OpenedAccount>
-    <openedAccountID>3ec83679-abf6-4922-904a-e80b45f6825e</openedAccountID>
-    <accountID>2d0a9a18-c8c9-494c-9c26-49a646a4d72d</accountID>
-    <counterpartyID>98c111bb-4bbb-4cf2-a8c6-67845aa80dd6</counterpartyID>
-    <changingDate>14.08.2022 15:05:03</changingDate>
-    <sum>900000</sum>
+    <openedAccountID>229be4e2-a137-4cd4-a395-3e0445d92c99</openedAccountID>
+    <accountID>f06ede38-f915-4dd6-9f28-eafa69cecf74</accountID>
+    <counterpartyID>619a6e5f-364b-4836-a773-a1826cf95d45</counterpartyID>
+    <changingDate>14.08.2022 16:43:40</changingDate>
   </OpenedAccount>
 </OpenedAccounts>
