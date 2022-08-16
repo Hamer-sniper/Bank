@@ -34,7 +34,7 @@
         /// <param name="account">Счет</param>
         /// <param name="counterparty">Контрагент</param>
         /// <param name="sum">Сумма</param>
-        public void Open(IAccount account, ICounterparty counterparty, string sum);
+        public void Open(string account, string counterparty, string sum);
 
         /// <summary>
         /// Закрыть счет

@@ -299,10 +299,10 @@ namespace Bank.Data
             if (!File.Exists(_openedAccountsFilePath)) AutoCreationOpenedAccounts();
 
             var openedAccounts = new List<OpenedAccounts>();
-            string xopenedAccountID = "", xaccountID = "", xcounterpartyID = "", xchangingDate = "", xsum = "";
+            string xopenedAccountID = "", xaccountID = "", xcounterpartyID = "", xchangingDate = "";
 
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(_clientsFilePath);
+            xDoc.Load(_openedAccountsFilePath);
 
             // получим корневой элемент
             XmlElement? xRoot = xDoc.DocumentElement;
@@ -326,61 +326,5 @@ namespace Bank.Data
             return openedAccounts;
         }
         #endregion
-
-        ///// <summary>
-        ///// Создать новую запись
-        ///// </summary>
-        ///// <param name="usurname"></param>
-        ///// <param name="uname"></param>
-        ///// <param name="umiddleName"></param>
-        ///// <param name="utelephoneNumber"></param>
-        ///// <param name="upasport"></param>
-        //public void Create(string usurname, string uname, string umiddleName, string utelephoneNumber, string upasport)
-        //{
-        //    var employee = new Employee()
-        //    {
-        //        Id = Guid.NewGuid().ToString(),
-        //        Surname = usurname,
-        //        Name = uname,
-        //        MiddleName = umiddleName,                
-        //        TelephoneNumber = utelephoneNumber,
-        //        Pasport = string.IsNullOrWhiteSpace(upasport) ? "Паспорт не задан" : upasport,
-
-        //        DateTimeChange = DateTime.Now.ToString(),
-        //        DataChanged = "All",
-        //        TypeOfChanges = "Creation",
-        //        Changer = "Manager"
-        //    };
-        //    // Запись в лог
-        //    var changesLog = Work_with_log.ReadFromLogXml();
-        //    changesLog.Add(employee);
-        //    Work_with_log.AddToLogXmlFromList(changesLog);
-
-        //    // Запись данных
-        //    var employees = ReadFromXml();
-        //    employees.Add(employee);
-        //    AddToXmlFromList(employees); 
-        //}
-
-        ///// <summary>
-        ///// Удалить запись
-        ///// </summary>
-        ///// <param name="emp"></param>
-        //public void Delete(Employee emp)
-        //{
-        //    var employees = ReadFromXml();
-        //    var tempEmployee = emp;
-
-        //    foreach (var employee in employees)
-        //    {
-        //        if (employee.Id == emp.Id)
-        //        {
-        //            tempEmployee = employee;
-        //            employees.Remove(tempEmployee);
-        //            break;
-        //        }
-        //    }
-        //    AddToXmlFromList(employees);
-        //}
     }
 }

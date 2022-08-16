@@ -76,13 +76,13 @@ namespace Bank.Models
         /// <param name="account">Счет</param>
         /// <param name="counterparty">Контрагент</param>
         /// <param name="sum">Сумма</param>
-        public void Open(IAccount account, ICounterparty counterparty, string sum)
+        public void Open(string account, string counterparty, string sum)
         {
             // Получить список созданных аккаунтов из XML.
             var openedAccounts = _dataProvider.ReadFromXmlOpenedAccounts();
 
             // Создать новый счет.
-            var openNewAccount = new OpenedAccounts(account.Id, counterparty.Id);
+            var openNewAccount = new OpenedAccounts(account, counterparty);
 
             // Добавить новый счет в список.
             openedAccounts.Add(openNewAccount);

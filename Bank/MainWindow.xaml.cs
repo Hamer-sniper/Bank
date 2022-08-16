@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Collections.Generic;
 using Bank.Models;
 using Bank.Interfaces;
 using Bank.Data;
@@ -11,63 +12,20 @@ namespace Bank
     /// </summary>
     public partial class MainWindow : Window
     {
-        //IPerson client = new Client();
         private readonly DataProvider _dataProvider = new DataProvider();
+        private readonly Employee _employee = new Employee();
 
         public MainWindow()
         {
             InitializeComponent();
-            ClientsList.ItemsSource = _dataProvider.ReadFromXml();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _dataProvider.ReadFromXmLAccounts();
-            _dataProvider.ReadFromXmlOpenedAccounts();
-
-            //EmployeeSelection.Items.Add("Консультант");
-            //EmployeeSelection.Items.Add("Менеджер");
-            //EmployeeSelection.SelectedIndex = 0;
-
-            //AddButton.IsEnabled = false;
-            //DeleteButton.IsEnabled = false;
-            //Surname.IsEnabled = false;
-            //Name.IsEnabled = false;
-            //MiddleName.IsEnabled = false;
-            //Pasport.IsEnabled = false;
-
-            //UpdateButton.IsEnabled = false;
-        }
-
-        private void EmployeeSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //if (EmployeeSelection.SelectedIndex == 0)
-            //    employee = new Consultant();
-
-            //if (EmployeeSelection.SelectedIndex == 1)
-            //    employee = new Manager();
-
-            //ClientsList.ItemsSource = employee.GetAll();
-            //EmployeeImage.Source = employee.GetBitmap();
-
-            //if (!string.IsNullOrWhiteSpace(TelephoneNumber.Text))
-            //{
-            //    AddButton.IsEnabled = EmployeeSelection.SelectedIndex == 1;
-            //    UpdateButton.IsEnabled = ClientsList.SelectedItem != null && ClientsList.SelectedItem != null;
-            //    DeleteButton.IsEnabled = ClientsList.SelectedItem != null && EmployeeSelection.SelectedIndex == 1 && ClientsList.SelectedItem != null;
-            //}
-
-            //Surname.IsEnabled = EmployeeSelection.SelectedIndex == 1;
-            //Name.IsEnabled = EmployeeSelection.SelectedIndex == 1;
-            //MiddleName.IsEnabled = EmployeeSelection.SelectedIndex == 1;
-            //Pasport.IsEnabled = EmployeeSelection.SelectedIndex == 1;
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            //_dataProvider.Create(Surname.Text, Name.Text, MiddleName.Text, TelephoneNumber.Text, Pasport.Text);
-            //ClientsList.ItemsSource = employee.GetAll();
-            //ClientsList.Items.Refresh();
+            SortBySurnameRadioButton.IsChecked = true;
+            CreateInformation.IsEnabled = false;
+            ChangeInformation.IsEnabled = false;
+            ShowAccountButton.IsEnabled = false;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -75,66 +33,90 @@ namespace Bank
             Application.Current.Shutdown();
         }
 
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            //var emp = (Employee)ClientsList.SelectedItem;            
-            //employee.Update(emp);
-            //ClientsList.ItemsSource = employee.GetAll();
-            //ClientsList.Items.Refresh();
+            ClientsList.ItemsSource = _dataProvider.ReadFromXml();
+            ClientsList.Items.Refresh();
+        }
+
+        private void ShowAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenedAccountsWindow openedAccountWindow = new OpenedAccountsWindow();
+            openedAccountWindow.SurnameLabelAccount.Content = $"{Surname.Text} {Name.Text} {MiddleName.Text}";
+            openedAccountWindow.AccountList.ItemsSource = _dataProvider.ReadFromXmlOpenedAccounts().FindAll(a => a.CounterpartyID == IdClient.Text);
+            openedAccountWindow.AccountList.Items.Refresh();
+
+            openedAccountWindow.Show();
+        }
+
+        private void SortBySurname_Checked(object sender, RoutedEventArgs e)
+        {
+            var data = _dataProvider.ReadFromXml();
+            data.Sort(Employee.SortedBy(Employee.SortedCriterion.Surname));
+            ClientsList.ItemsSource = data;
+            ClientsList.Items.Refresh();
+        }
+
+        private void SortByName_Checked(object sender, RoutedEventArgs e)
+        {
+            var data = _dataProvider.ReadFromXml();
+            data.Sort(Employee.SortedBy(Employee.SortedCriterion.Name));
+            ClientsList.ItemsSource = data;
+            ClientsList.Items.Refresh();
+        }
+
+        private void ChangeInformation_Click(object sender, RoutedEventArgs e)
+        {
+            _employee.Update((Client)ClientsList.SelectedItem);
+        }
+
+        private void ChangeAllInformation_Click(object sender, RoutedEventArgs e)
+        {
+            _dataProvider.WriteToXml((List<Client>)ClientsList.ItemsSource);
+        }
+
+        private void CreateInformation_Click(object sender, RoutedEventArgs e)
+        {
+            _employee.Create(Surname.Text, Name.Text, MiddleName.Text, TelephoneNumber.Text, Pasport.Text);
+            if (SortByNameRadioButton.IsChecked == true)
+                SortByName_Checked(sender, e);
+            else
+                SortBySurname_Checked(sender, e);
+        }
+
+        private void Surname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CreateInformation.IsEnabled = !string.IsNullOrWhiteSpace(Surname.Text);
+            ChangeInformation.IsEnabled = !string.IsNullOrWhiteSpace(Surname.Text);
+            ShowAccountButton.IsEnabled = !string.IsNullOrWhiteSpace(Surname.Text);
+        }
+
+        private void Name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CreateInformation.IsEnabled = !string.IsNullOrWhiteSpace(Name.Text);
+            ChangeInformation.IsEnabled = !string.IsNullOrWhiteSpace(Name.Text);
+            ShowAccountButton.IsEnabled = !string.IsNullOrWhiteSpace(Name.Text);
+        }
+
+        private void MiddleName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CreateInformation.IsEnabled = !string.IsNullOrWhiteSpace(MiddleName.Text);
+            ChangeInformation.IsEnabled = !string.IsNullOrWhiteSpace(MiddleName.Text);
+            ShowAccountButton.IsEnabled = !string.IsNullOrWhiteSpace(MiddleName.Text);
         }
 
         private void TelephoneNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
-           
-
-            // Не сохранять запись без введеного номера телефона.
-            //if (string.IsNullOrWhiteSpace(TelephoneNumber.Text))
-            //{
-            //    AddButton.IsEnabled = false;
-            //    UpdateButton.IsEnabled = false;
-            //    DeleteButton.IsEnabled = false;
-            //}
-            //if (!string.IsNullOrWhiteSpace(TelephoneNumber.Text) && ClientsList.SelectedItem != null)
-            //{
-            //    UpdateButton.IsEnabled = true;                
-                
-            //}
+            CreateInformation.IsEnabled = !string.IsNullOrWhiteSpace(TelephoneNumber.Text);
+            ChangeInformation.IsEnabled = !string.IsNullOrWhiteSpace(TelephoneNumber.Text);
+            ShowAccountButton.IsEnabled = !string.IsNullOrWhiteSpace(TelephoneNumber.Text);
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private void Pasport_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //var emp = (Employee)ClientsList.SelectedItem;
-            //_dataProvider.Delete(emp);
-            //ClientsList.ItemsSource = employee.GetAll();
-            //ClientsList.Items.Refresh();
-        }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            //ClientsList.ItemsSource = employee.GetAll();
-            //ClientsList.Items.Refresh();
-        }
-
-        private void SortBySurname_Click(object sender, RoutedEventArgs e)
-        {
-            //var emp = employee.GetAll();
-            //emp.Sort(Employee.SortedBy(Employee.SortedCriterion.Surname));
-            //ClientsList.ItemsSource = emp;
-            //ClientsList.Items.Refresh();
-        }
-
-        private void SortByName_Click(object sender, RoutedEventArgs e)
-        {
-            //var emp = employee.GetAll();
-            //emp.Sort(Employee.SortedBy(Employee.SortedCriterion.Name));
-            //ClientsList.ItemsSource = emp;
-            //ClientsList.Items.Refresh();
-        }
-
-        private void ShowLog_Click(object sender, RoutedEventArgs e)
-        {
-            //LogWindow logWindow = new LogWindow();
-            //logWindow.Show();
+            CreateInformation.IsEnabled = !string.IsNullOrWhiteSpace(Pasport.Text);
+            ChangeInformation.IsEnabled = !string.IsNullOrWhiteSpace(Pasport.Text);
+            ShowAccountButton.IsEnabled = !string.IsNullOrWhiteSpace(Pasport.Text);
         }
     }
 }

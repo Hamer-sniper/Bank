@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Windows.Controls;
+using System.Windows;
 using Bank.Interfaces;
 
 namespace Bank.Models
@@ -46,6 +49,29 @@ namespace Bank.Models
             this("Федоров", "Федор", "Федорович", "89187665577", "0708 100600") { }
         #endregion
 
+        
 
+        //private void AddButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    _dataManager.Create(Surname.Text, Name.Text, MiddleName.Text, TelephoneNumber.Text, Pasport.Text);
+        //    ClientsList.ItemsSource = employee.GetAll();
+        //    ClientsList.Items.Refresh();
+        //}
+
+        //private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var emp = (Employee)ClientsList.SelectedItem;
+        //    employee.Update(emp);
+        //    ClientsList.ItemsSource = employee.GetAll();
+        //    ClientsList.Items.Refresh();
+        //}
+
+        //private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var emp = (Employee)ClientsList.SelectedItem;
+        //    _dataManager.Delete(emp);
+        //    ClientsList.ItemsSource = employee.GetAll();
+        //    ClientsList.Items.Refresh();
+        //}
     }
 }
