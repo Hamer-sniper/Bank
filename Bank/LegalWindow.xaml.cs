@@ -10,12 +10,12 @@ namespace Bank
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LegalWindow : Window
     {
         private readonly DataProvider _dataProvider = new DataProvider();
-        private readonly Client _employee = new Client();
+        private readonly Company _company = new Company();
 
-        public MainWindow()
+        public LegalWindow()
         {
             InitializeComponent();
         }
@@ -36,7 +36,7 @@ namespace Bank
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            ClientsList.ItemsSource = _dataProvider.ReadFromXml();
+            ClientsList.ItemsSource = _dataProvider.ReadFromXmlLegal();
             ClientsList.Items.Refresh();
         }
 
@@ -64,23 +64,23 @@ namespace Bank
 
         private void SortBySurname_Checked(object sender, RoutedEventArgs e)
         {
-            var data = _dataProvider.ReadFromXml();
-            data.Sort(Client.SortedBy(Client.SortedCriterion.Surname));
+            var data = _dataProvider.ReadFromXmlLegal();
+            data.Sort(Company.SortedBy(Company.SortedCriterion.Surname));
             ClientsList.ItemsSource = data;
             ClientsList.Items.Refresh();
         }
 
         private void SortByName_Checked(object sender, RoutedEventArgs e)
         {
-            var data = _dataProvider.ReadFromXml();
-            data.Sort(Client.SortedBy(Client.SortedCriterion.Name));
+            var data = _dataProvider.ReadFromXmlLegal();
+            data.Sort(Company.SortedBy(Company.SortedCriterion.Name));
             ClientsList.ItemsSource = data;
             ClientsList.Items.Refresh();
         }
 
         private void ChangeInformation_Click(object sender, RoutedEventArgs e)
         {
-            _employee.Update((Client)ClientsList.SelectedItem);
+            _company.Update((Company)ClientsList.SelectedItem);
             if (SortByNameRadioButton.IsChecked == true)
                 SortByName_Checked(sender, e);
             else
@@ -89,12 +89,12 @@ namespace Bank
 
         private void ChangeAllInformation_Click(object sender, RoutedEventArgs e)
         {
-            _dataProvider.WriteToXml((List<Client>)ClientsList.ItemsSource);
+            _dataProvider.WriteToXmlLegal((List<Company>)ClientsList.ItemsSource);
         }
 
         private void CreateInformation_Click(object sender, RoutedEventArgs e)
         {
-            _employee.Create(Surname.Text, Name.Text, MiddleName.Text, TelephoneNumber.Text, Pasport.Text);
+            _company.Create(Surname.Text, Name.Text, MiddleName.Text, TelephoneNumber.Text, Pasport.Text, OGRN.Text, Type.Text);
             if (SortByNameRadioButton.IsChecked == true)
                 SortByName_Checked(sender, e);
             else
@@ -103,7 +103,7 @@ namespace Bank
 
         private void DeleteInformation_Click(object sender, RoutedEventArgs e)
         {
-            _employee.Delete((Client)ClientsList.SelectedItem);
+            _company.Delete((Company)ClientsList.SelectedItem);
             if (SortByNameRadioButton.IsChecked == true)
                 SortByName_Checked(sender, e);
             else
@@ -116,13 +116,6 @@ namespace Bank
             ChangeInformation.IsEnabled = ClientsList.SelectedItems.Count != 0;
             DeleteInformation.IsEnabled = ClientsList.SelectedItems.Count != 0;
             ShowAccountButton.IsEnabled = ClientsList.SelectedItems.Count != 0;
-
-        }
-
-        private void CompanyOpenButton_Click(object sender, RoutedEventArgs e)
-        {
-            LegalWindow legalWindow = new LegalWindow();
-            legalWindow.Show();
 
         }
     }
