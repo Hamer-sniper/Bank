@@ -31,7 +31,7 @@ namespace Bank
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -44,8 +44,12 @@ namespace Bank
         {
             AccountsWindow accountWindow = new AccountsWindow();
             accountWindow.SurnameLabelAccount.Content = $"{Surname.Text} {Name.Text} {MiddleName.Text}";
-            accountWindow.CounterpartyID.Text = IdClient.Text;
-            accountWindow.AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts().FindAll(a => a.CounterpartyID == IdClient.Text);
+
+            Subject<Company> universalCounterparty = new Subject<Company>((Company)ClientsList.SelectedItem);
+            var counterpartyIDText = universalCounterparty.GetSubjectID();
+
+            accountWindow.CounterpartyID.Text = counterpartyIDText;
+            accountWindow.AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts().FindAll(a => a.CounterpartyID == counterpartyIDText);
             accountWindow.AccountList.Items.Refresh();
 
             accountWindow.Show();

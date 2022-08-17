@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Bank.Models;
 using Bank.Interfaces;
 using Bank.Data;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Bank
 {
@@ -13,7 +14,7 @@ namespace Bank
     public partial class MainWindow : Window
     {
         private readonly DataProvider _dataProvider = new DataProvider();
-        private readonly Client _employee = new Client();
+        private readonly Client _client = new Client();
 
         public MainWindow()
         {
@@ -31,7 +32,7 @@ namespace Bank
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -44,8 +45,12 @@ namespace Bank
         {
             AccountsWindow accountWindow = new AccountsWindow();
             accountWindow.SurnameLabelAccount.Content = $"{Surname.Text} {Name.Text} {MiddleName.Text}";
-            accountWindow.CounterpartyID.Text = IdClient.Text;
-            accountWindow.AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts().FindAll(a => a.CounterpartyID == IdClient.Text);
+
+            Subject<Client> universalCounterparty = new Subject<Client>((Client)ClientsList.SelectedItem);
+            var counterpartyIDText = universalCounterparty.GetSubjectID();
+
+            accountWindow.CounterpartyID.Text = counterpartyIDText;
+            accountWindow.AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts().FindAll(a => a.CounterpartyID == counterpartyIDText);
             accountWindow.AccountList.Items.Refresh();
 
             accountWindow.Show();
@@ -80,7 +85,7 @@ namespace Bank
 
         private void ChangeInformation_Click(object sender, RoutedEventArgs e)
         {
-            _employee.Update((Client)ClientsList.SelectedItem);
+            _client.Update((Client)ClientsList.SelectedItem);
             if (SortByNameRadioButton.IsChecked == true)
                 SortByName_Checked(sender, e);
             else
@@ -94,7 +99,7 @@ namespace Bank
 
         private void CreateInformation_Click(object sender, RoutedEventArgs e)
         {
-            _employee.Create(Surname.Text, Name.Text, MiddleName.Text, TelephoneNumber.Text, Pasport.Text);
+            _client.Create(Surname.Text, Name.Text, MiddleName.Text, TelephoneNumber.Text, Pasport.Text);
             if (SortByNameRadioButton.IsChecked == true)
                 SortByName_Checked(sender, e);
             else
@@ -103,7 +108,7 @@ namespace Bank
 
         private void DeleteInformation_Click(object sender, RoutedEventArgs e)
         {
-            _employee.Delete((Client)ClientsList.SelectedItem);
+            _client.Delete((Client)ClientsList.SelectedItem);
             if (SortByNameRadioButton.IsChecked == true)
                 SortByName_Checked(sender, e);
             else
