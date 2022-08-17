@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bank"
         mc:Ignorable="d"
-        Title="Счета" Height="600" Width="800" MinWidth="220" MinHeight="600">
+        Title="Счета" Height="600" Width="800" MinWidth="220" MinHeight="600" Loaded="Window_Loaded">
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25*" MinWidth="200" MaxWidth="200"/>
@@ -18,21 +18,38 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.ColumnSpan="2" x:Name="SurnameLabelAccount" Foreground="White" Content="Фамилия" HorizontalContentAlignment="Center"/>
-
         <StackPanel Margin="10" Grid.Column="0" Grid.Row="1">
-            <Label x:Name="AccountLabel" Width="180" Content="Счет" Foreground="White" HorizontalContentAlignment="Center"/>
-            <TextBox x:Name="Account" Text="{Binding ElementName= AccountList, Path=SelectedItem.AccountID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     Margin="0" TextWrapping="Wrap" Width="180" IsEnabled="False"/>
-            <Button x:Name="ShowConcreteAccountButton" Margin="0 15 0 0" Content="Подробности счета" Width="180" HorizontalContentAlignment="Center" Click="ShowConcreteAccountButton_Click"/>
-        </StackPanel>
+            <Label x:Name="CounterpartyLabel" Width="180" Content="Id открывшего счет" Foreground="White" HorizontalContentAlignment="Center"/>
+            <TextBox x:Name="CounterpartyID" Margin="0" TextWrapping="Wrap" Width="180" IsEnabled="False" TextChanged="CounterpartyID_TextChanged"/>
 
+            <Label x:Name="CurrenceLabel" Width="180" Content="Валюта" Foreground="White" HorizontalContentAlignment="Center"/>
+            <ComboBox Name="CurrencyList" VerticalAlignment="Top" SelectionChanged="CurrencyList_SelectionChanged">
+                <ComboBoxItem>Рубль</ComboBoxItem>
+                <ComboBoxItem>Евро</ComboBoxItem>
+                <ComboBoxItem>Манат</ComboBoxItem>
+                <ComboBoxItem>Тенге</ComboBoxItem>
+                <ComboBoxItem>Доллар</ComboBoxItem>
+            </ComboBox>
+            <Label x:Name="SumLabel" Width="180" Content="Сумма" Foreground="White" HorizontalContentAlignment="Center"/>
+            <TextBox x:Name="Sum" TextWrapping="Wrap" Width="180" TextChanged="Sum_TextChanged"/>
+
+            <Button x:Name="OpenAccountButton" Margin="0 15 0 0" Content="Открыть счет" Width="180" HorizontalContentAlignment="Center" Click="OpenAccountButton_Click"/>
+
+            <Label x:Name="AccountLabel" Width="180" Content="Id счета" Foreground="White" HorizontalContentAlignment="Center"/>
+            <TextBox x:Name="AccountID" Text="{Binding ElementName= AccountList, Path=SelectedItem.AccountID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="0" TextWrapping="Wrap" Width="180" IsEnabled="False" TextChanged="CounterpartyID_TextChanged"/>
+            <Button x:Name="CloseAccountButton" Margin="0 15 0 15" Content="Закрыть счет" Width="180" HorizontalContentAlignment="Center" Click="CloseAccountButton_Click"/>
+
+        </StackPanel>
+        
         <ListView  Grid.Row="1" Grid.Column="1" x:Name="AccountList" Background="#FF969696">
             <ListView.View>
-                <GridView x:Name="AccountssListGridView" AllowsColumnReorder="True">
-                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Width="45" Header="Номер записи"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Currency}" Width="100" Header="Валюта"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Number}" Width="250" Header="Номер счета"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Sum}" Width="200" Header="Сумма"/>
+                <GridView x:Name="AccountsListGridView" AllowsColumnReorder="True">
+                    <GridViewColumn DisplayMemberBinding="{Binding AccountID}" Width="50" Header="ID счета"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding ChangingDate}" Width="140" Header="Дата открытия"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Number}" Width="150" Header="Номер счета"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Currency}" Width="80" Header="Валюта"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Sum}" Width="100" Header="Сумма"/>
                 </GridView>
             </ListView.View>
         </ListView>

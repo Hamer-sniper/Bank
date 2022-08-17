@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="AccountsWindow.xaml.cs">
+    <Compile Update="AccountsAllWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="AccountsWindow.xaml">
+    <Page Update="AccountsAllWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

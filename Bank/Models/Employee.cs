@@ -118,14 +118,25 @@ namespace Bank.Models
         }
 
         /// <summary>
+        /// Удалить запись
+        /// </summary>
+        public void Delete(Client emp)
+        {
+            var clients = _dataProvider.ReadFromXml();
+            var client = clients.Find(x => x.Id == emp.Id);
+
+            if (client != null)
+                clients.Remove(client);
+            
+            _dataProvider.WriteToXml(clients);
+        }
+
+        /// <summary>
         /// Изменить всю информацию
         /// </summary>
         public void Update(Client emp)
         {
             var clients = _dataProvider.ReadFromXml();
-
-            //var client = clients.Find(x => x.Id == emp.id);
-
 
             foreach (var client in clients)
             {

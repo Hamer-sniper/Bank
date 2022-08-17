@@ -12,7 +12,6 @@ namespace Bank.Data
         private readonly static string _clientsFilePath = Environment.CurrentDirectory + @"\Data\Clients.xml";
         private readonly static string _companiesFilePath = Environment.CurrentDirectory + @"\Data\Companies.xml";
         private readonly static string _accountsFilePath = Environment.CurrentDirectory + @"\Data\Accounts.xml";
-        private readonly static string _openedAccountsFilePath = Environment.CurrentDirectory + @"\Data\OpenedAccounts.xml";
 
         #region Счета
 
@@ -42,12 +41,14 @@ namespace Bank.Data
             foreach (var account in accountsList)
             {
                 XElement ak = new XElement("Account");
-                XElement id = new XElement("id", account.Id);
+                XElement accountID = new XElement("accountID", account.AccountID);
+                XElement counterpartyID = new XElement("counterpartyID", account.CounterpartyID);
+                XElement changingDate = new XElement("changingDate", account.ChangingDate);
                 XElement currency = new XElement("currency", account.Currency);
                 XElement number = new XElement("number", account.Number);
                 XElement sum = new XElement("sum", account.Sum);
 
-                ak.Add(id, currency, number, sum);
+                ak.Add(accountID, counterpartyID, changingDate, currency, number, sum);
                 accounts.Add(ak);
             }
             accounts.Save(_accountsFilePath);
@@ -62,7 +63,7 @@ namespace Bank.Data
             if (!File.Exists(_accountsFilePath)) AutoCreationAccounts();
 
             var accounts = new List<Account>();
-            string xid = "", xcurrency = "", xnumber = "", xsum = "";
+            string xaccountID = "", xcounterpartyID = "", xchangingDate = "", xcurrency = "", xnumber = "", xsum = "";
 
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(_accountsFilePath);
@@ -77,12 +78,14 @@ namespace Bank.Data
                     // обходим все дочерние узлы элемента
                     foreach (XmlNode childnode in xnode.ChildNodes)
                     {
-                        if (childnode.Name == "id") xid = childnode.InnerText;
+                        if (childnode.Name == "accountID") xaccountID = childnode.InnerText;
                         if (childnode.Name == "currency") xcurrency = childnode.InnerText;
                         if (childnode.Name == "number") xnumber = childnode.InnerText;
                         if (childnode.Name == "sum") xsum = childnode.InnerText;
+                        if (childnode.Name == "counterpartyID") xcounterpartyID = childnode.InnerText;
+                        if (childnode.Name == "changingDate") xchangingDate = childnode.InnerText;
                     }
-                    var account = new Account(xid, xcurrency, xnumber, xsum);
+                    var account = new Account(xaccountID, xcurrency, xnumber, xsum, xcounterpartyID, xchangingDate);
                     accounts.Add(account);
                 }
             }
@@ -249,81 +252,6 @@ namespace Bank.Data
                 }
             }
             return companies;
-        }
-        #endregion
-
-        #region Открытые счета
-        /// <summary>
-        /// Автосоздание данных (Открытые счета)
-        /// </summary>
-        private void AutoCreationOpenedAccounts()
-        {
-            var openedAccounts = new List<OpenedAccounts>();
-
-            for (int i = 1; i < 10; i++)
-            {
-                var openedAccount = new OpenedAccounts(Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
-                openedAccounts.Add(openedAccount);
-            }
-            WriteToXmlOpenedAccounts(openedAccounts);
-        }
-
-        /// <summary>
-        /// Запись в xml (Открытые счета)
-        /// </summary>
-        /// <param name="openedAccountsList">Открытые счета</param>
-        public void WriteToXmlOpenedAccounts(List<OpenedAccounts> openedAccountsList)
-        {
-            XElement openedAccounts = new XElement("OpenedAccounts");
-
-            foreach (var openedAccount in openedAccountsList)
-            {
-                XElement openedxAccount = new XElement("OpenedAccount");
-                XElement openedAccountID = new XElement("openedAccountID", openedAccount.OpenedAccountID);
-                XElement accountID = new XElement("accountID", openedAccount.AccountID);
-                XElement counterpartyID = new XElement("counterpartyID", openedAccount.CounterpartyID);
-                XElement changingDate = new XElement("changingDate", openedAccount.ChangingDate);
-                
-                openedxAccount.Add(openedAccountID, accountID, counterpartyID, changingDate);
-                openedAccounts.Add(openedxAccount);
-            }
-            openedAccounts.Save(_openedAccountsFilePath);
-        }
-
-        /// <summary>
-        /// Чтение из xml (Открытые счета)
-        /// </summary>        
-        /// <returns>clients</returns>
-        public List<OpenedAccounts> ReadFromXmlOpenedAccounts()
-        {
-            if (!File.Exists(_openedAccountsFilePath)) AutoCreationOpenedAccounts();
-
-            var openedAccounts = new List<OpenedAccounts>();
-            string xopenedAccountID = "", xaccountID = "", xcounterpartyID = "", xchangingDate = "";
-
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(_openedAccountsFilePath);
-
-            // получим корневой элемент
-            XmlElement? xRoot = xDoc.DocumentElement;
-            if (xRoot != null)
-            {
-                // обход всех узлов в корневом элементе
-                foreach (XmlElement xnode in xRoot)
-                {
-                    // обходим все дочерние узлы элемента
-                    foreach (XmlNode childnode in xnode.ChildNodes)
-                    {
-                        if (childnode.Name == "openedAccountID") xopenedAccountID = childnode.InnerText;
-                        if (childnode.Name == "accountID") xaccountID = childnode.InnerText;
-                        if (childnode.Name == "counterpartyID") xcounterpartyID = childnode.InnerText;
-                        if (childnode.Name == "changingDate") xchangingDate = childnode.InnerText;
-                    }
-                    var openedAccount = new OpenedAccounts(xopenedAccountID, xaccountID, xcounterpartyID, xchangingDate);
-                    openedAccounts.Add(openedAccount);
-                }
-            }
-            return openedAccounts;
         }
         #endregion
     }

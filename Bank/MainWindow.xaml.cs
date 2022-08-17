@@ -25,6 +25,7 @@ namespace Bank
             SortBySurnameRadioButton.IsChecked = true;
             CreateInformation.IsEnabled = false;
             ChangeInformation.IsEnabled = false;
+            DeleteInformation.IsEnabled = false;
             ShowAccountButton.IsEnabled = false;
         }
 
@@ -41,12 +42,24 @@ namespace Bank
 
         private void ShowAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenedAccountsWindow openedAccountWindow = new OpenedAccountsWindow();
-            openedAccountWindow.SurnameLabelAccount.Content = $"{Surname.Text} {Name.Text} {MiddleName.Text}";
-            openedAccountWindow.AccountList.ItemsSource = _dataProvider.ReadFromXmlOpenedAccounts().FindAll(a => a.CounterpartyID == IdClient.Text);
-            openedAccountWindow.AccountList.Items.Refresh();
+            AccountsWindow accountWindow = new AccountsWindow();
+            accountWindow.SurnameLabelAccount.Content = $"{Surname.Text} {Name.Text} {MiddleName.Text}";
+            accountWindow.CounterpartyID.Text = IdClient.Text;
+            accountWindow.AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts().FindAll(a => a.CounterpartyID == IdClient.Text);
+            accountWindow.AccountList.Items.Refresh();
 
-            openedAccountWindow.Show();
+            accountWindow.Show();
+        }
+
+
+        private void ShowAllAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+            AccountsAllWindow accountAllWindow = new AccountsAllWindow();
+
+            accountAllWindow.AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts();
+            accountAllWindow.AccountList.Items.Refresh();
+
+            accountAllWindow.Show();
         }
 
         private void SortBySurname_Checked(object sender, RoutedEventArgs e)
@@ -68,6 +81,10 @@ namespace Bank
         private void ChangeInformation_Click(object sender, RoutedEventArgs e)
         {
             _employee.Update((Client)ClientsList.SelectedItem);
+            if (SortByNameRadioButton.IsChecked == true)
+                SortByName_Checked(sender, e);
+            else
+                SortBySurname_Checked(sender, e);
         }
 
         private void ChangeAllInformation_Click(object sender, RoutedEventArgs e)
@@ -84,39 +101,22 @@ namespace Bank
                 SortBySurname_Checked(sender, e);
         }
 
-        private void Surname_TextChanged(object sender, TextChangedEventArgs e)
+        private void DeleteInformation_Click(object sender, RoutedEventArgs e)
         {
-            CreateInformation.IsEnabled = !string.IsNullOrWhiteSpace(Surname.Text);
-            ChangeInformation.IsEnabled = !string.IsNullOrWhiteSpace(Surname.Text);
-            ShowAccountButton.IsEnabled = !string.IsNullOrWhiteSpace(Surname.Text);
+            _employee.Delete((Client)ClientsList.SelectedItem);
+            if (SortByNameRadioButton.IsChecked == true)
+                SortByName_Checked(sender, e);
+            else
+                SortBySurname_Checked(sender, e);
         }
 
-        private void Name_TextChanged(object sender, TextChangedEventArgs e)
+        private void ClientsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CreateInformation.IsEnabled = !string.IsNullOrWhiteSpace(Name.Text);
-            ChangeInformation.IsEnabled = !string.IsNullOrWhiteSpace(Name.Text);
-            ShowAccountButton.IsEnabled = !string.IsNullOrWhiteSpace(Name.Text);
-        }
+            CreateInformation.IsEnabled = ClientsList.SelectedItems.Count != 0;
+            ChangeInformation.IsEnabled = ClientsList.SelectedItems.Count != 0;
+            DeleteInformation.IsEnabled = ClientsList.SelectedItems.Count != 0;
+            ShowAccountButton.IsEnabled = ClientsList.SelectedItems.Count != 0;
 
-        private void MiddleName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CreateInformation.IsEnabled = !string.IsNullOrWhiteSpace(MiddleName.Text);
-            ChangeInformation.IsEnabled = !string.IsNullOrWhiteSpace(MiddleName.Text);
-            ShowAccountButton.IsEnabled = !string.IsNullOrWhiteSpace(MiddleName.Text);
-        }
-
-        private void TelephoneNumber_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CreateInformation.IsEnabled = !string.IsNullOrWhiteSpace(TelephoneNumber.Text);
-            ChangeInformation.IsEnabled = !string.IsNullOrWhiteSpace(TelephoneNumber.Text);
-            ShowAccountButton.IsEnabled = !string.IsNullOrWhiteSpace(TelephoneNumber.Text);
-        }
-
-        private void Pasport_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CreateInformation.IsEnabled = !string.IsNullOrWhiteSpace(Pasport.Text);
-            ChangeInformation.IsEnabled = !string.IsNullOrWhiteSpace(Pasport.Text);
-            ShowAccountButton.IsEnabled = !string.IsNullOrWhiteSpace(Pasport.Text);
         }
     }
 }

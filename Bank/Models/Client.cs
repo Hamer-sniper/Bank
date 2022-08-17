@@ -48,30 +48,5 @@ namespace Bank.Models
         public Client() :
             this("Федоров", "Федор", "Федорович", "89187665577", "0708 100600") { }
         #endregion
-
-        
-
-        //private void AddButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    _dataManager.Create(Surname.Text, Name.Text, MiddleName.Text, TelephoneNumber.Text, Pasport.Text);
-        //    ClientsList.ItemsSource = employee.GetAll();
-        //    ClientsList.Items.Refresh();
-        //}
-
-        //private void UpdateButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var emp = (Employee)ClientsList.SelectedItem;
-        //    employee.Update(emp);
-        //    ClientsList.ItemsSource = employee.GetAll();
-        //    ClientsList.Items.Refresh();
-        //}
-
-        //private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var emp = (Employee)ClientsList.SelectedItem;
-        //    _dataManager.Delete(emp);
-        //    ClientsList.ItemsSource = employee.GetAll();
-        //    ClientsList.Items.Refresh();
-        //}
     }
 }
