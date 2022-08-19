@@ -1,4 +1,5 @@
 ﻿using Bank.Data;
+using Bank.Interfaces;
 using Bank.Models;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,11 @@ namespace Bank
 
         private void TransactButton_Click(object sender, RoutedEventArgs e)
         {
-            _account.Transact(Account.Text, AccountTo.Text, Sum.Text);
+            // У Counterparty нет метода Transact, а у IKontr есть.
+            IKontr<Client> l = new Kontr<Counterparty>();
+
+            l.Transact(Account.Text, AccountTo.Text, Sum.Text);
+
             AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts();
             AccountList.Items.Refresh();
         }

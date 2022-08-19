@@ -14,8 +14,6 @@ namespace Bank.Models
     /// <typeparam name="T">Физическое/Юридическое лицо</typeparam>
     public class Subject<T> : ISubject<T>
     {
-        private readonly DataProvider _dataProvider = new DataProvider();
-
         /// <summary>
         /// Контрагент
         /// </summary>

@@ -10,13 +10,9 @@ namespace Bank.Models
     /// <summary>
     /// Физическое лицо
     /// </summary>
-    public abstract class Physical : IPhysical
+    public abstract class Physical : Counterparty, IPhysical
     {
         #region Свойства
-        /// <summary>
-        /// Id
-        /// </summary>
-        public string Id { get; set; } = string.Empty;
         /// <summary>
         /// Фамилия
         /// </summary>

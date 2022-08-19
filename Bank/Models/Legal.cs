@@ -10,13 +10,9 @@ namespace Bank.Models
     /// <summary>
     /// Юридическое лицо
     /// </summary>
-    public abstract class Legal : ILegal
+    public abstract class Legal : Counterparty, ILegal
     {
         #region Свойства
-        /// <summary>
-        /// Id
-        /// </summary>
-        public string Id { get; set; } = string.Empty;
         /// <summary>
         /// Фамилия
         /// </summary>
