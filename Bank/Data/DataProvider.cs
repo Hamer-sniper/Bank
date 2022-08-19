@@ -24,7 +24,7 @@ namespace Bank.Data
 
             for (int i = 1; i < 10; i++)
             {
-                var account = new Account("Рубль", $"0505 1589 1789 104{i}", $"{i}00000");
+                var account = new Account("Рубль", $"0505 1589 1789 104{i}", $"{i}00000", "Да");
                 accounts.Add(account);
             }
             WriteToXmlAccounts(accounts);
@@ -47,8 +47,9 @@ namespace Bank.Data
                 XElement currency = new XElement("currency", account.Currency);
                 XElement number = new XElement("number", account.Number);
                 XElement sum = new XElement("sum", account.Sum);
+                XElement deposit = new XElement("deposit", account.Deposit);
 
-                ak.Add(accountID, counterpartyID, changingDate, currency, number, sum);
+                ak.Add(accountID, counterpartyID, changingDate, currency, number, sum, deposit);
                 accounts.Add(ak);
             }
             accounts.Save(_accountsFilePath);
@@ -63,7 +64,7 @@ namespace Bank.Data
             if (!File.Exists(_accountsFilePath)) AutoCreationAccounts();
 
             var accounts = new List<Account>();
-            string xaccountID = "", xcounterpartyID = "", xchangingDate = "", xcurrency = "", xnumber = "", xsum = "";
+            string xaccountID = "", xcounterpartyID = "", xchangingDate = "", xcurrency = "", xnumber = "", xsum = "", xdeposit = "";
 
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(_accountsFilePath);
@@ -84,8 +85,9 @@ namespace Bank.Data
                         if (childnode.Name == "sum") xsum = childnode.InnerText;
                         if (childnode.Name == "counterpartyID") xcounterpartyID = childnode.InnerText;
                         if (childnode.Name == "changingDate") xchangingDate = childnode.InnerText;
+                        if (childnode.Name == "deposit") xdeposit = childnode.InnerText;
                     }
-                    var account = new Account(xaccountID, xcurrency, xnumber, xsum, xcounterpartyID, xchangingDate);
+                    var account = new Account(xaccountID, xcurrency, xnumber, xsum, xcounterpartyID, xchangingDate, xdeposit);
                     accounts.Add(account);
                 }
             }

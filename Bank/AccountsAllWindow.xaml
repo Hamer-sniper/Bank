@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bank"
         mc:Ignorable="d"
-        Title="Все открытые счета" Height="600" Width="800" MinWidth="220" MinHeight="600" Loaded="Window_Loaded">
+        Title="Все открытые счета" Height="600" Width="900" MinWidth="220" MinHeight="600" Loaded="Window_Loaded">
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25*" MinWidth="200" MaxWidth="200"/>
@@ -40,6 +40,7 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Number}" Width="150" Header="Номер счета"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Currency}" Width="90" Header="Валюта"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Sum}" Width="80" Header="Сумма"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Deposit}" Width="100" Header="Депозитный"/>
                 </GridView>
             </ListView.View>
         </ListView>

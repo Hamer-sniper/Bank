@@ -31,19 +31,10 @@ namespace Bank
             InitializeComponent();
         }
 
-        private void OpenAccountButton_Click(object sender, RoutedEventArgs e)
-        {
-            ComboBoxItem selectedItem = (ComboBoxItem)CurrencyList.SelectedItem;
-            string currency = selectedItem.Content.ToString();
-
-            _account.Open(currency, Sum.Text, CounterpartyID.Text);
-            AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts().FindAll(a => a.CounterpartyID == CounterpartyID.Text);
-            AccountList.Items.Refresh();
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            OpenAccountButton.IsEnabled = false;
+            OpenDepositAccountButton.IsEnabled = false;
+            OpenNoDepositAccountButton.IsEnabled = false;
             CloseAccountButton.IsEnabled = false;
         }
 
@@ -54,7 +45,8 @@ namespace Bank
 
         private void Sum_TextChanged(object sender, TextChangedEventArgs e)
         {
-            OpenAccountButton.IsEnabled = CurrencyList.SelectedIndex > 0 && !string.IsNullOrWhiteSpace(Sum.Text);
+            OpenDepositAccountButton.IsEnabled = CurrencyList.SelectedIndex > 0 && !string.IsNullOrWhiteSpace(Sum.Text);
+            OpenNoDepositAccountButton.IsEnabled = CurrencyList.SelectedIndex > 0 && !string.IsNullOrWhiteSpace(Sum.Text);
         }
 
         private void CloseAccountButton_Click(object sender, RoutedEventArgs e)
@@ -66,7 +58,34 @@ namespace Bank
 
         private void CurrencyList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            OpenAccountButton.IsEnabled = CurrencyList.SelectedIndex > 0 && !string.IsNullOrWhiteSpace(Sum.Text);
+            OpenDepositAccountButton.IsEnabled = CurrencyList.SelectedIndex > 0 && !string.IsNullOrWhiteSpace(Sum.Text);
+            OpenNoDepositAccountButton.IsEnabled = CurrencyList.SelectedIndex > 0 && !string.IsNullOrWhiteSpace(Sum.Text);
+        }
+
+        private void OpenDepositAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+            ComboBoxItem selectedItem = (ComboBoxItem)CurrencyList.SelectedItem;
+            string currency = selectedItem.Content.ToString();
+
+            IAk<Account> ak = new Deposit();
+            var account = ak.GetAccount(currency, Sum.Text, CounterpartyID.Text);
+            _account.Open(account);
+
+            AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts().FindAll(a => a.CounterpartyID == CounterpartyID.Text);
+            AccountList.Items.Refresh();
+        }
+
+        private void OpenNoDepositAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+            ComboBoxItem selectedItem = (ComboBoxItem)CurrencyList.SelectedItem;
+            string currency = selectedItem.Content.ToString();
+
+            IAk<Account> ak = new NoDeposit();
+            var account = ak.GetAccount(currency, Sum.Text, CounterpartyID.Text);
+            _account.Open(account);
+
+            AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts().FindAll(a => a.CounterpartyID == CounterpartyID.Text);
+            AccountList.Items.Refresh();
         }
     }
 }

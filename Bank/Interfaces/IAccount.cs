@@ -41,7 +41,7 @@
         /// <param name="account">Счет</param>
         /// <param name="counterparty">Контрагент</param>
         /// <param name="sum">Сумма</param>
-        public void Open(string account, string counterparty, string sum);
+        //public void Open(string account, string counterparty, string sum, string deposit);
 
         /// <summary>
         /// Закрыть счет

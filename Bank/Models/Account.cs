@@ -6,38 +6,11 @@ using Bank.Interfaces;
 namespace Bank.Models
 {
     /// <summary>
-    /// Счета
+    /// Банковские счета
     /// </summary>
-    public class Account : IAccount
+    public class Account : MainAccount, IAccount
     {
         private readonly DataProvider _dataProvider = new DataProvider();
-
-        #region Свойства
-        /// <summary>
-        /// ID счета
-        /// </summary>
-        public string AccountID { get; set; } = string.Empty;
-        /// <summary>
-        /// ID открывшего счет
-        /// </summary>
-        public string CounterpartyID { get; set; } = string.Empty;
-        /// <summary>
-        /// Дата и время изменения записи
-        /// </summary>
-        public string ChangingDate { get; set; } = string.Empty;
-        /// <summary>
-        /// Валюта
-        /// </summary>
-        public string Currency { get; set; } = string.Empty;
-        /// <summary>
-        /// Номер счета
-        /// </summary>
-        public string Number { get; set; } = string.Empty;
-        /// <summary>
-        /// Сумма
-        /// </summary>
-        public string Sum { get; set; } = string.Empty;
-        #endregion
 
         #region Конструкторы
         /// <summary>
@@ -47,7 +20,7 @@ namespace Bank.Models
         /// <param name="currency">Фамилия</param>
         /// <param name="number">Имя</param>      
         /// <param name="sum">Сумма</param>
-        public Account(string accountID, string currency, string number, string sum, string counterpartyID, string changingDate)
+        public Account(string accountID, string currency, string number, string sum, string counterpartyID, string changingDate, string deposit)
         {
             this.AccountID = accountID;
             this.Currency = currency;
@@ -55,6 +28,7 @@ namespace Bank.Models
             this.Sum = sum;
             this.CounterpartyID = counterpartyID;
             this.ChangingDate = changingDate;
+            this.Deposit = deposit;
         }
 
         /// <summary>
@@ -62,20 +36,21 @@ namespace Bank.Models
         /// </summary>
         /// <param name="currency">Фамилия</param>
         /// <param name="number">Имя</param>
-        public Account(string currency, string sum, string counterpartyID) :
+        public Account(string currency, string sum, string counterpartyID, string deposit) :
             this(Guid.NewGuid().ToString(),
                 currency,
                 $"{new Random().Next(999, 10000).ToString()} {new Random().Next(999, 10000).ToString()} {new Random().Next(999, 10000).ToString()} {new Random().Next(999, 10000).ToString()}",
                 sum,
                 counterpartyID,
-                DateTime.Now.ToString())
+                DateTime.Now.ToString(),
+                deposit)
         { }
 
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
         public Account() :
-            this("Рубль", "400000", Guid.NewGuid().ToString())
+            this("Рубль", "400000", Guid.NewGuid().ToString(), "Да")
         { }
         #endregion
 
@@ -84,18 +59,13 @@ namespace Bank.Models
         /// Открыть счет
         /// </summary>
         /// <param name="account">Счет</param>
-        /// <param name="counterparty">Контрагент</param>
-        /// <param name="sum">Сумма</param>
-        public void Open(string currency, string sum, string counterparty)
+        public void Open(Account account)
         {
             // Получить список созданных аккаунтов из XML.
             var accounts = _dataProvider.ReadFromXmLAccounts();
 
-            // Создать новый счет.
-            var openNewAccount = new Account(currency, sum, counterparty);
-
             // Добавить новый счет в список.
-            accounts.Add(openNewAccount);
+            accounts.Add(account);
 
             // Записать в XML обновленный список счетов.
             _dataProvider.WriteToXmlAccounts(accounts);

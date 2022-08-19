@@ -1,84 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Accounts>
   <Account>
-    <id>5b59ec26-b7ef-42b8-9833-e4f9e416953f</id>
-    <accountID>3c6bb871-bb13-44d3-8a23-56df3689385d</accountID>
-    <counterpartyID>be162da6-3c9f-4d0a-a7cc-1f47aaf97c6b</counterpartyID>
+    <accountID>be162da6-3c9f-4d0a-a7cc-1f47aaf97c6b</accountID>
+    <counterpartyID>3c6bb871-bb13-44d3-8a23-56df3689385d</counterpartyID>
     <changingDate>16.08.2022 15:42:36</changingDate>
     <currency>Рубль</currency>
     <number>0505 1589 1789 1041</number>
-    <sum>100000</sum>
+    <sum>80000</sum>
+	<deposit>Да</deposit>
   </Account>
   <Account>
-    <id>9e0ddd6a-f787-4af7-94a7-13a4035f7f59</id>
-    <accountID>e2964798-ba3c-47cb-8a67-db2b6c41f554</accountID>
-    <counterpartyID>cde2719f-e25f-4ca4-914b-7715342fb17f</counterpartyID>
+    <accountID>cde2719f-e25f-4ca4-914b-7715342fb17f</accountID>
+    <counterpartyID>e2964798-ba3c-47cb-8a67-db2b6c41f554</counterpartyID>
     <changingDate>16.08.2022 15:42:36</changingDate>
     <currency>Рубль</currency>
     <number>0505 1589 1789 1042</number>
     <sum>200000</sum>
+	<deposit>Да</deposit>
   </Account>
   <Account>
-    <id>015b88cd-4896-4f78-9556-4a5d0998700c</id>
-    <accountID>cf2d8a84-b513-424e-9e80-35047ff12ee8</accountID>
-    <counterpartyID>7d69c4aa-692b-4fad-bf28-121fad4e0f55</counterpartyID>
+    <accountID>7d69c4aa-692b-4fad-bf28-121fad4e0f55</accountID>
+    <counterpartyID>e2964798-ba3c-47cb-8a67-db2b6c41f554</counterpartyID>
     <changingDate>16.08.2022 15:42:36</changingDate>
-    <currency>Рубль</currency>
+    <currency>Доллар</currency>
     <number>0505 1589 1789 1043</number>
     <sum>300000</sum>
+	<deposit>Да</deposit>
   </Account>
   <Account>
-    <id>af2b4a4a-74c3-46d9-b9d8-2cebea1d24c6</id>
     <accountID>f6b9bf8b-c9a1-4a76-8e3c-da7c6a7820c1</accountID>
     <counterpartyID>26787b86-c381-461b-8adc-5983a55fa15d</counterpartyID>
     <changingDate>16.08.2022 15:42:36</changingDate>
     <currency>Рубль</currency>
     <number>0505 1589 1789 1044</number>
     <sum>400000</sum>
+	<deposit>Да</deposit>
   </Account>
   <Account>
-    <id>4ebeffa5-ef98-407d-9f73-56d39449a55c</id>
-    <accountID>cb7d4a9e-d980-4b4a-9f92-8ec3dfc51ac3</accountID>
-    <counterpartyID>0f4e7f63-ba24-4971-b006-aca0c5c24380</counterpartyID>
-    <changingDate>16.08.2022 15:42:36</changingDate>
-    <currency>Рубль</currency>
-    <number>0505 1589 1789 1045</number>
-    <sum>500000</sum>
-  </Account>
-  <Account>
-    <id>0302fb15-33d9-4484-89e1-fcfdb7a1efab</id>
-    <accountID>a56d8019-9b7f-4353-8eb0-3eb3b4972e8d</accountID>
+    <accountID>3c6bb871-bb13-44d3-8a23-56df3689385d</accountID>
     <counterpartyID>a4705aec-5432-44a0-8ab2-0bcf2333e27e</counterpartyID>
     <changingDate>16.08.2022 15:42:36</changingDate>
     <currency>Рубль</currency>
     <number>0505 1589 1789 1046</number>
     <sum>600000</sum>
+	<deposit>Да</deposit>
   </Account>
   <Account>
-    <id>f64f1f99-d744-4f68-97ed-05acdcabf16b</id>
-    <accountID>882b7135-2393-4911-a3bc-4d67a6423f54</accountID>
-    <counterpartyID>95d2a42c-2c05-49a8-8748-cc3518cb918a</counterpartyID>
-    <changingDate>16.08.2022 15:42:36</changingDate>
-    <currency>Рубль</currency>
-    <number>0505 1589 1789 1047</number>
-    <sum>700000</sum>
-  </Account>
-  <Account>
-    <id>d1e8d4cc-e8ca-4a37-a5ab-3ab3f745816c</id>
     <accountID>027fe376-7e7b-4c1e-a008-567eb8e99cb0</accountID>
     <counterpartyID>66cdc91c-2ffb-4dc8-8307-99499dbf11ef</counterpartyID>
     <changingDate>16.08.2022 15:42:36</changingDate>
     <currency>Рубль</currency>
     <number>0505 1589 1789 1048</number>
     <sum>800000</sum>
+	<deposit>Да</deposit>
   </Account>
   <Account>
-    <id>43d420a6-14ac-4837-b9c3-d9628f2aea5b</id>
     <accountID>13dc62af-a264-433a-ac12-d8cf26db8507</accountID>
     <counterpartyID>663e2de9-c2e7-42a2-9385-719c30c6ead7</counterpartyID>
     <changingDate>16.08.2022 15:42:36</changingDate>
     <currency>Рубль</currency>
     <number>0505 1589 1789 1049</number>
     <sum>900000</sum>
+	<deposit>Да</deposit>
+  </Account>
+  <Account>
+    <accountID>8dfa9c31-5327-47dc-8d8f-a589a76c0292</accountID>
+    <counterpartyID>0bf534be-aa63-4ef9-8ab9-014a172263c8</counterpartyID>
+    <changingDate>16.08.2022 18:17:45</changingDate>
+    <currency>Рубль</currency>
+    <number>2034 4718 3532 7913</number>
+    <sum>30000</sum>
+	<deposit>Да</deposit>
+  </Account>
+  <Account>
+    <accountID>8cefab09-bde2-4bbc-a809-16162b1a9bba</accountID>
+    <counterpartyID>3c6bb871-bb13-44d3-8a23-56df3689385d</counterpartyID>
+    <changingDate>16.08.2022 18:31:20</changingDate>
+    <currency>Доллар</currency>
+    <number>9061 3611 6675 7506</number>
+    <sum>50000</sum>
+	<deposit>Да</deposit>
+  </Account>
+  <Account>
+    <accountID>e3f0b46d-f7bf-45c3-aa59-51b07b158ecd</accountID>
+    <counterpartyID>3c6bb871-bb13-44d3-8a23-56df3689385d</counterpartyID>
+    <changingDate>17.08.2022 13:13:54</changingDate>
+    <currency>Тенге</currency>
+    <number>9560 2837 3635 2694</number>
+    <sum>15000</sum>
+	<deposit>Да</deposit>
+  </Account>
+  <Account>
+    <accountID>6e72cb7a-c5a4-4960-a10a-4fc6b7d15087</accountID>
+    <counterpartyID>3c6bb871-bb13-44d3-8a23-56df3689385d</counterpartyID>
+    <changingDate>17.08.2022 14:30:02</changingDate>
+    <currency>Манат</currency>
+    <number>7960 7155 7878 1661</number>
+    <sum>70000</sum>
+	<deposit>Да</deposit>
   </Account>
 </Accounts>
