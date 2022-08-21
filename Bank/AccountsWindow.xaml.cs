@@ -45,8 +45,8 @@ namespace Bank
 
         private void Sum_TextChanged(object sender, TextChangedEventArgs e)
         {
-            OpenDepositAccountButton.IsEnabled = CurrencyList.SelectedIndex > 0 && !string.IsNullOrWhiteSpace(Sum.Text);
-            OpenNoDepositAccountButton.IsEnabled = CurrencyList.SelectedIndex > 0 && !string.IsNullOrWhiteSpace(Sum.Text);
+            OpenDepositAccountButton.IsEnabled = CurrencyList.SelectedIndex != -1 && !string.IsNullOrWhiteSpace(Sum.Text);
+            OpenNoDepositAccountButton.IsEnabled = CurrencyList.SelectedIndex != -1 && !string.IsNullOrWhiteSpace(Sum.Text);
         }
 
         private void CloseAccountButton_Click(object sender, RoutedEventArgs e)
@@ -58,8 +58,8 @@ namespace Bank
 
         private void CurrencyList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            OpenDepositAccountButton.IsEnabled = CurrencyList.SelectedIndex > 0 && !string.IsNullOrWhiteSpace(Sum.Text);
-            OpenNoDepositAccountButton.IsEnabled = CurrencyList.SelectedIndex > 0 && !string.IsNullOrWhiteSpace(Sum.Text);
+            OpenDepositAccountButton.IsEnabled = CurrencyList.SelectedIndex != -1 && !string.IsNullOrWhiteSpace(Sum.Text);
+            OpenNoDepositAccountButton.IsEnabled = CurrencyList.SelectedIndex != -1 && !string.IsNullOrWhiteSpace(Sum.Text);
         }
 
         private void OpenDepositAccountButton_Click(object sender, RoutedEventArgs e)

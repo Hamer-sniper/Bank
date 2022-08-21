@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using Bank.Data;
 using Bank.Interfaces;
 
@@ -12,7 +13,15 @@ namespace Bank.Models
     {
         private readonly DataProvider _dataProvider = new DataProvider();
 
+        // Событие изменения счета.
+        public static event Action<Account, string> OnAccountChanged;
+
         #region Конструкторы
+        static Account()
+        {
+            OnAccountChanged += WriteLogToTxt.Account_OnAccountChanged;
+        }
+
         /// <summary>
         /// Конструктор со всеми полями
         /// </summary>
@@ -69,6 +78,9 @@ namespace Bank.Models
 
             // Записать в XML обновленный список счетов.
             _dataProvider.WriteToXmlAccounts(accounts);
+
+            // Событие изменения счета.
+            OnAccountChanged(account, "Открыт новый счет");
         }
 
         /// <summary>
@@ -92,6 +104,9 @@ namespace Bank.Models
 
                 // Записать в XML обновленный список открытых счетов.
                 _dataProvider.WriteToXmlAccounts(accounts);
+
+                // Событие изменения счета.
+                OnAccountChanged(accountToDelete, "Счет закрыт");
             }
         }
 
@@ -126,6 +141,9 @@ namespace Bank.Models
 
                 // Записать в XML обновленный список счетов.
                 _dataProvider.WriteToXmlAccounts(accounts);
+
+                // Событие изменения счета.
+                OnAccountChanged(aF, "Произведен перевод");
             }
         }
         #endregion
