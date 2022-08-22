@@ -1,4 +1,4 @@
-﻿namespace Bank.Interfaces
+﻿namespace LogicForBank_ClassLibrary.Interfaces
 {
     /// <summary>
     /// Интефейс субъекта (Физическое/Юридическое лицо)

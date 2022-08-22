@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Bank.Data;
-using Bank.Interfaces;
+using LogicForBank_ClassLibrary.Data;
+using LogicForBank_ClassLibrary.Interfaces;
 
-namespace Bank.Models
+namespace LogicForBank_ClassLibrary.Models
 {
     public class Deposit : IAk<Account>
     {

@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LogicForBank_ClassLibrary\LogicForBank_ClassLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="EmployeeIcon.png" />
   </ItemGroup>
 
@@ -22,21 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Data\Accounts.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Clients.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Companies.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\Log.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\OpenedAccounts.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Pictures\EmployeeIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

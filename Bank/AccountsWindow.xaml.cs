@@ -1,6 +1,6 @@
-﻿using Bank.Data;
-using Bank.Interfaces;
-using Bank.Models;
+﻿using LogicForBank_ClassLibrary.Data;
+using LogicForBank_ClassLibrary.Interfaces;
+using LogicForBank_ClassLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

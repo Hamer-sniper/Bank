@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Bank.Interfaces;
+using LogicForBank_ClassLibrary.Interfaces;
 
-namespace Bank.Models
+namespace LogicForBank_ClassLibrary.Models
 {
     /// <summary>
-    /// Юридическое лицо
+    /// Физическое лицо
     /// </summary>
-    public abstract class Legal : Counterparty, ILegal
+    public abstract class Physical : Counterparty, IPhysical
     {
         #region Свойства
         /// <summary>
@@ -33,14 +33,6 @@ namespace Bank.Models
         /// Паспорт
         /// </summary>
         public string Pasport { get; set; } = string.Empty;
-        /// <summary>
-        /// ОГРН
-        /// </summary>
-        public string OGRN { get; set; } = string.Empty;
-        /// <summary>
-        /// Тип (ИП, ООО)
-        /// </summary>
-        public string Type { get; set; } = string.Empty;
         #endregion
     }
 }

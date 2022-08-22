@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Bank.Data;
-using Bank.Interfaces;
+using LogicForBank_ClassLibrary.Data;
 
-namespace Bank.Models
+namespace LogicForBank_ClassLibrary.Models
 {
     /// <summary>
-    /// Компания (Юридическое лицо)
+    /// Клиент (Физическое лицо)
     /// </summary>
-    public class Company : Legal
+    public class Client : Physical
     {
         DataProvider _dataProvider = new DataProvider();
 
@@ -16,15 +15,13 @@ namespace Bank.Models
         /// <summary>
         /// Конструктор со всеми полями
         /// </summary>
-        /// <param name="id">Id</param>
+        /// <param name="id">id</param>
         /// <param name="surname">Фамилия</param>
         /// <param name="name">Имя</param>
         /// <param name="middleName">Отчество</param>
         /// <param name="telephoneNumber">Номер телефона</param>
         /// <param name="pasport">Паспорт</param>
-        /// <param name="ogrn">ОГРН</param>
-        /// <param name="type">ИП/ООО</param>
-        public Company(string id, string surname, string name, string middleName, string telephoneNumber, string pasport, string ogrn, string type)
+        public Client(string id, string surname, string name, string middleName, string telephoneNumber, string pasport)
         {
             this.Id = id;
             this.Surname = surname;
@@ -32,28 +29,24 @@ namespace Bank.Models
             this.MiddleName = middleName;
             this.TelephoneNumber = telephoneNumber;
             this.Pasport = pasport;
-            this.OGRN = ogrn;
-            this.Type = type;
         }
 
         /// <summary>
         /// Конструктор с автоподстановкой id
-        /// </summary>
+        /// </summary>        
         /// <param name="surname">Фамилия</param>
         /// <param name="name">Имя</param>
         /// <param name="middleName">Отчество</param>
         /// <param name="telephoneNumber">Номер телефона</param>
         /// <param name="pasport">Паспорт</param>
-        /// <param name="ogrn">ОГРН</param>
-        /// <param name="type">ИП/ООО</param>
-        public Company(string surname, string name, string middleName, string telephoneNumber, string pasport, string ogrn, string type) :
-            this(Guid.NewGuid().ToString(), surname, name, middleName, telephoneNumber, pasport, ogrn, type) { }
+        public Client(string surname, string name, string middleName, string telephoneNumber, string pasport) :
+            this(Guid.NewGuid().ToString(), surname, name, middleName, telephoneNumber, pasport) { }
 
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
-        public Company() :
-            this("Федоров", "Федор", "Федорович", "89187665577", "0708 100600", "1-02-66-05-60662-0", "ООО") { }
+        public Client() :
+            this("Ахвердов", "Андрей", "Александрович", "89187665566", "0708 100500") { }
         #endregion
 
         #region Сортировка
@@ -69,12 +62,12 @@ namespace Bank.Models
         /// <summary>
         /// Сортировка по имени
         /// </summary>
-        private class SortBySurname : IComparer<Company>
+        private class SortBySurname : IComparer<Client>
         {
-            public int Compare(Company x, Company y)
+            public int Compare(Client x, Client y)
             {
-                Company X = (Company)x;
-                Company Y = (Company)y;
+                Client X = (Client)x;
+                Client Y = (Client)y;
 
                 return string.Compare(X.Surname, Y.Surname);
             }
@@ -83,12 +76,12 @@ namespace Bank.Models
         /// <summary>
         /// Сортировка по фамилии
         /// </summary>
-        private class SortByName : IComparer<Company>
+        private class SortByName : IComparer<Client>
         {
-            public int Compare(Company x, Company y)
+            public int Compare(Client x, Client y)
             {
-                Company X = (Company)x;
-                Company Y = (Company)y;
+                Client X = (Client)x;
+                Client Y = (Client)y;
 
                 return string.Compare(X.Name, Y.Name);
             }
@@ -99,7 +92,7 @@ namespace Bank.Models
         /// </summary>
         /// <param name="criterion"></param>
         /// <returns>List<Client></returns>
-        public static IComparer<Company> SortedBy(SortedCriterion criterion)
+        public static IComparer<Client> SortedBy(SortedCriterion criterion)
         {
             if (criterion == SortedCriterion.Name) return new SortByName();
             else return new SortBySurname();
@@ -115,64 +108,64 @@ namespace Bank.Models
         /// <param name="middleName"></param>
         /// <param name="telephoneNumber"></param>
         /// <param name="pasport"></param>
-        public void Create(string surname, string name, string middleName, string telephoneNumber, string pasport, string ogrn, string type)
+        public void Create(string surname, string name, string middleName, string telephoneNumber, string pasport)
         {
-            var company = new Company(surname, name, middleName, telephoneNumber, string.IsNullOrWhiteSpace(pasport) ? "Паспорт не задан" : pasport, ogrn, type);
+            var client = new Client(surname, name, middleName, telephoneNumber, string.IsNullOrWhiteSpace(pasport) ? "Паспорт не задан" : pasport);
 
             // Запись данных
-            var companies = _dataProvider.ReadFromXmlLegal();
-            companies.Add(company);
-            _dataProvider.WriteToXmlLegal(companies);
+            var clients = _dataProvider.ReadFromXml();
+            clients.Add(client);
+            _dataProvider.WriteToXml(clients);
         }
 
         /// <summary>
         /// Удалить запись
         /// </summary>
-        public void Delete(Company cmp)
+        public void Delete(Client emp)
         {
-            var clients = _dataProvider.ReadFromXmlLegal();
-            var company = clients.Find(x => x.Id == cmp.Id);
+            var clients = _dataProvider.ReadFromXml();
+            var client = clients.Find(x => x.Id == emp.Id);
 
-            if (company != null)
-                clients.Remove(company);
-
-            _dataProvider.WriteToXmlLegal(clients);
+            if (client != null)
+                clients.Remove(client);
+            
+            _dataProvider.WriteToXml(clients);
         }
 
         /// <summary>
         /// Изменить всю информацию
         /// </summary>
-        public void Update(Company cmp)
+        public void Update(Client emp)
         {
-            var companies = _dataProvider.ReadFromXmlLegal();
+            var clients = _dataProvider.ReadFromXml();
 
-            foreach (var company in companies)
+            foreach (var client in clients)
             {
-                if (company.Id != cmp.Id)
+                if (client.Id != emp.Id)
                     continue;
 
-                if (cmp.Surname != company.Surname)
-                    company.Surname = cmp.Surname;
-                if (cmp.Name != company.Name)
-                    company.Name = cmp.Name;
-                if (cmp.MiddleName != company.MiddleName)
-                    company.MiddleName = cmp.MiddleName;
-                if (cmp.TelephoneNumber != company.TelephoneNumber)
-                    company.TelephoneNumber = cmp.TelephoneNumber;
-                if (cmp.Pasport != company.Pasport)
-                    company.Pasport = string.IsNullOrWhiteSpace(cmp.Pasport) ? "Паспорт не задан" : cmp.Pasport;
+                if (emp.Surname != client.Surname)
+                    client.Surname = emp.Surname;
+                if (emp.Name != client.Name)
+                    client.Name = emp.Name;
+                if (emp.MiddleName != client.MiddleName)
+                    client.MiddleName = emp.MiddleName;
+                if (emp.TelephoneNumber != client.TelephoneNumber)
+                    client.TelephoneNumber = emp.TelephoneNumber;
+                if (emp.Pasport != client.Pasport)
+                    client.Pasport = string.IsNullOrWhiteSpace(emp.Pasport) ? "Паспорт не задан" : emp.Pasport;
 
                 break;
             }
-            _dataProvider.WriteToXmlLegal(companies);
+            _dataProvider.WriteToXml(clients);
         }
 
         /// <summary>
         /// Изменить всю информацию
         /// </summary>
-        public void UpdateAll(List<Company> companies)
-        {
-            _dataProvider.WriteToXmlLegal(companies);
+        public void UpdateAll(List<Client> clients)
+        {         
+            _dataProvider.WriteToXml(clients);
         }
         #endregion
     }

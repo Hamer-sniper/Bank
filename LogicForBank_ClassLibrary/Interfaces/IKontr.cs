@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Bank.Models;
+using LogicForBank_ClassLibrary.Models;
 
-namespace Bank.Interfaces
+namespace LogicForBank_ClassLibrary.Interfaces
 {
     public interface IKontr<in T>
         where T : Counterparty

@@ -1,11 +1,11 @@
-﻿using Bank.Interfaces;
+﻿using LogicForBank_ClassLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bank.Models
+namespace LogicForBank_ClassLibrary.Models
 {
     public class Counterparty : ICounterparty
     {

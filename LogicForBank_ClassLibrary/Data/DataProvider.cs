@@ -3,9 +3,9 @@ using System.Xml.Linq;
 using System.Collections.Generic;
 using System;
 using System.IO;
-using Bank.Models;
+using LogicForBank_ClassLibrary.Models;
 
-namespace Bank.Data
+namespace LogicForBank_ClassLibrary.Data
 {
     public class DataProvider
     {

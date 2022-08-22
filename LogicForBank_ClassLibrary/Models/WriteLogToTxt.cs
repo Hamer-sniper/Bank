@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
-namespace Bank.Models
+namespace LogicForBank_ClassLibrary.Models
 {
-    internal class WriteLogToTxt
+    public class WriteLogToTxt
     {
         private readonly static string _logFilePath = Environment.CurrentDirectory + @"\Data\Log.txt";
         
@@ -20,7 +16,5 @@ namespace Bank.Models
         {
             File.AppendAllText(_logFilePath, $"\n{DateTime.Now.ToString()} - Произошли изменения со счетом {account.AccountID} у пользователя {account.CounterpartyID} на сумму {account.Sum}: {reason}.");
         }
-        // Событие изменения счета.
-        //OnAccountChanged(aF, "Произведен перевод");
     }
 }

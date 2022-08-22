@@ -1,4 +1,4 @@
-﻿namespace Bank.Interfaces
+﻿namespace LogicForBank_ClassLibrary.Interfaces
 {
     public interface IAccount
     {

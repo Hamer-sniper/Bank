@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Collections.Generic;
-using Bank.Models;
-using Bank.Interfaces;
-using Bank.Data;
+using LogicForBank_ClassLibrary.Models;
+using LogicForBank_ClassLibrary.Interfaces;
+using LogicForBank_ClassLibrary.Data;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Bank
@@ -37,8 +37,10 @@ namespace Bank
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            ClientsList.ItemsSource = _dataProvider.ReadFromXml();
-            ClientsList.Items.Refresh();
+            if (SortByNameRadioButton.IsChecked == true)
+                SortByName_Checked(sender, e);
+            else
+                SortBySurname_Checked(sender, e);
         }
 
         private void ShowAccountButton_Click(object sender, RoutedEventArgs e)
