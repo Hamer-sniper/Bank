@@ -64,28 +64,48 @@ namespace Bank
 
         private void OpenDepositAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            ComboBoxItem selectedItem = (ComboBoxItem)CurrencyList.SelectedItem;
-            string currency = selectedItem.Content.ToString();
+            try
+            {
+                ComboBoxItem selectedItem = (ComboBoxItem)CurrencyList.SelectedItem;
+                string currency = selectedItem.Content.ToString();
 
-            IAk<Account> ak = new Deposit();
-            var account = ak.GetAccount(currency, Sum.Text, CounterpartyID.Text);
-            _account.Open(account);
+                if (!int.TryParse(Sum.Text, out int s))
+                    throw new MyException("В поле \"Сумма\" введено не число!");
 
-            AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts().FindAll(a => a.CounterpartyID == CounterpartyID.Text);
-            AccountList.Items.Refresh();
+                IAk<Account> ak = new Deposit();
+                var account = ak.GetAccount(currency, Sum.Text, CounterpartyID.Text);
+                _account.Open(account);
+
+                AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts().FindAll(a => a.CounterpartyID == CounterpartyID.Text);
+                AccountList.Items.Refresh();
+            }
+            catch (MyException ex)
+            {
+               MessageBox.Show(ex.MyMessage);
+            }    
         }
 
         private void OpenNoDepositAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            ComboBoxItem selectedItem = (ComboBoxItem)CurrencyList.SelectedItem;
-            string currency = selectedItem.Content.ToString();
+            try
+            {
+                ComboBoxItem selectedItem = (ComboBoxItem)CurrencyList.SelectedItem;
+                string currency = selectedItem.Content.ToString();
 
-            IAk<Account> ak = new NoDeposit();
-            var account = ak.GetAccount(currency, Sum.Text, CounterpartyID.Text);
-            _account.Open(account);
+                if (!int.TryParse(Sum.Text, out int s))
+                    throw new MyException("В поле \"Сумма\" введено не число!");
 
-            AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts().FindAll(a => a.CounterpartyID == CounterpartyID.Text);
-            AccountList.Items.Refresh();
+                IAk<Account> ak = new NoDeposit();
+                var account = ak.GetAccount(currency, Sum.Text, CounterpartyID.Text);
+                _account.Open(account);
+
+                AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts().FindAll(a => a.CounterpartyID == CounterpartyID.Text);
+                AccountList.Items.Refresh();
+            }
+            catch (MyException ex)
+            {
+                MessageBox.Show(ex.MyMessage);
+            }
         }
     }
 }

@@ -37,13 +37,23 @@ namespace Bank
 
         private void TransactButton_Click(object sender, RoutedEventArgs e)
         {
-            // У Counterparty нет метода Transact, а у IKontr есть.
-            IKontr<Client> l = new Kontr<Counterparty>();
+            try
+            {
+                // У Counterparty нет метода Transact, а у IKontr есть.
+                IKontr<Client> l = new Kontr<Counterparty>();
 
-            l.Transact(Account.Text, AccountTo.Text, Sum.Text);
+                if (!int.TryParse(Sum.Text, out int s))
+                    throw new MyException("В поле \"Сумма\" введено не число!");
 
-            AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts();
-            AccountList.Items.Refresh();
+                l.Transact(Account.Text, AccountTo.Text, Sum.Text);
+
+                AccountList.ItemsSource = _dataProvider.ReadFromXmLAccounts();
+                AccountList.Items.Refresh();
+            }
+            catch (MyException ex)
+            {
+                MessageBox.Show(ex.MyMessage);
+            }
         }
 
         private void Sum_TextChanged(object sender, TextChangedEventArgs e)
