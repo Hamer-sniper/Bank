@@ -135,9 +135,13 @@ namespace LogicForBank_ClassLibrary.Models
                 aF.Currency == aT.Currency &&
                 accountF >= sumFT)
             {
+                // Найти новые суммы (оператор)
+                aF = aF - sumFT;
+                aT = aT + sumFT;
+
                 // Найти новые суммы.
-                aF.Sum = (accountF - sumFT).ToString();
-                aT.Sum = (accountT + sumFT).ToString();
+                //aF.Sum = (accountF - sumFT).ToString();
+                //aT.Sum = (accountT + sumFT).ToString();
 
                 // Записать в XML обновленный список счетов.
                 _dataProvider.WriteToXmlAccounts(accounts);
@@ -145,6 +149,56 @@ namespace LogicForBank_ClassLibrary.Models
                 // Событие изменения счета.
                 OnAccountChanged(aF, "Произведен перевод");
             }
+        }
+        #endregion
+
+        #region Операторы
+        /// <summary>
+        /// Суммировать счета
+        /// </summary>
+        /// <param name="account">Счет</param>
+        public static Account operator +(Account account1, Account account2)
+        {
+            var account3 = (Account)account1.MemberwiseClone();
+
+            account3.Sum = (int.Parse(account1.Sum) + int.Parse(account2.Sum)).ToString();
+
+            return account3;
+        }
+
+        /// <summary>
+        /// Пополнить счет
+        /// </summary>
+        /// <param name="account">Счет</param>
+        public static Account operator +(Account account1, double sum)
+        {
+            account1.Sum = (int.Parse(account1.Sum) + sum).ToString();
+
+            return account1;
+        }
+
+        /// <summary>
+        /// Вычесть счета
+        /// </summary>
+        /// <param name="account">Счет</param>
+        public static Account operator -(Account account1, Account account2)
+        {
+            var account3 = (Account)account1.MemberwiseClone();
+
+            account3.Sum = (int.Parse(account1.Sum) - int.Parse(account2.Sum)).ToString();
+
+            return account3;
+        }
+
+        /// <summary>
+        /// Списать со счета
+        /// </summary>
+        /// <param name="account">Счет</param>
+        public static Account operator -(Account account1, double sum)
+        {
+            account1.Sum = (int.Parse(account1.Sum) - sum).ToString();
+
+            return account1;
         }
         #endregion
     }
