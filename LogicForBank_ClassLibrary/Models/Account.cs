@@ -138,11 +138,11 @@ namespace LogicForBank_ClassLibrary.Models
                 // Найти новые суммы (оператор)
                 aF = aF - sumFT;
                 aT = aT + sumFT;
-
+                
                 // Найти новые суммы.
                 //aF.Sum = (accountF - sumFT).ToString();
                 //aT.Sum = (accountT + sumFT).ToString();
-
+                
                 // Записать в XML обновленный список счетов.
                 _dataProvider.WriteToXmlAccounts(accounts);
 
@@ -201,5 +201,7 @@ namespace LogicForBank_ClassLibrary.Models
             return account1;
         }
         #endregion
+
+        
     }
 }

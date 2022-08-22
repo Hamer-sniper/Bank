@@ -92,8 +92,9 @@ namespace Bank
                 ComboBoxItem selectedItem = (ComboBoxItem)CurrencyList.SelectedItem;
                 string currency = selectedItem.Content.ToString();
 
-                if (!int.TryParse(Sum.Text, out int s))
-                    throw new MyException("В поле \"Сумма\" введено не число!");
+                //if (!int.TryParse(Sum.Text, out int s))
+                    //throw new MyException("В поле \"Сумма\" введено не число!");
+                Sum.Text.ToDouble();
 
                 IAk<Account> ak = new NoDeposit();
                 var account = ak.GetAccount(currency, Sum.Text, CounterpartyID.Text);
